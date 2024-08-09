@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ post.title }} | Idílio Efêmero</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="title">Idílio Efêmero</h1>
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('about') }}">Sobre</a>
+            </nav>
+        </div>
+    </header>
+    <hr class="divider">
+    <main>
+        <div class="container post">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <div class="post-date">{{ post.created_at.strftime('%d %b %Y %H:%M') }}</div>
+            {% if post.image_url %}
+                <img src="{{ post.image_url }}" alt="Imagem do Post" class="post-image">
+            {% endif %}
+            <div class="content">
+                {{ post.content|safe }}
+            </div>
+            <a href="{{ url_for('index') }}" class="back-link">Voltar</a>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+            <div class="social-links">
+                <a href="https://instagram.com/yourprofile" target="_blank">Instagram</a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+                <a href="https://github.com/yourprofile" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

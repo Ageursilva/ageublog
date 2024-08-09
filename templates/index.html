@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Idílio Efêmero</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="title">Idílio Efêmero</h1>
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('about') }}">Sobre</a>
+            </nav>
+        </div>
+    </header>
+    <hr>
+    <main>
+        <div class="posts">
+            {% for post in posts %}
+            <div class="card">
+                {% if post.image_url %}
+                    <img src="{{ post.image_url }}" alt="Imagem do Post" class="post-image">
+                {% endif %}
+                <h3>{{ post.post.title }}</h3>
+                <p>{{ post.excerpt }}...</p>
+                <a href="{{ url_for('post', post_id=post.post.id) }}">Continuar Lendo</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {% if pagination.has_prev %}
+                <a href="{{ url_for('index', page=pagination.prev_num) }}">« Anterior</a>
+            {% endif %}
+            {% if pagination.has_next %}
+                <a href="{{ url_for('index', page=pagination.next_num) }}">Próximo »</a>
+            {% endif %}
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank" >CC BY-NC-SA 4.0</a>
+            <p></p>
+            <div class="social-links">
+                <a href="https://instagram.com/yourprofile" target="_blank">Instagram</a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+                <a href="https://github.com/yourprofile" target="_blank">GitHub</a>
+                
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

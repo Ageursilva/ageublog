@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Sobre - Idílio Efêmero</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="title">Idílio Efêmero</div>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('about') }}">Sobre</a>
+        </nav>
+    </header>
+    <hr>
+    <main>
+        <div class="about">
+            <h1>Sobre Nós</h1>
+            <p>Informações sobre o blog...</p>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank" >CC BY-NC-SA 4.0</a>
+            <p></p>
+            <div class="social-links">
+                <a href="https://instagram.com/yourprofile" target="_blank">Instagram</a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+                <a href="https://github.com/yourprofile" target="_blank">GitHub</a>
+                
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
