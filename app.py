@@ -99,6 +99,17 @@ def logout():
 def about():
     return render_template('about.html')
 
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('query')
+    if query:
+        # Use SQLAlchemy para fazer a busca nos posts
+        results = Post.query.filter(Post.title.contains(query) | Post.content.contains(query)).all()
+    else:
+        results = []
+    return render_template('search_results.html', query=query, results=results)
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Cria as tabelas no banco de dados

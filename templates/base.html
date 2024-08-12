@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Idílio Efêmero{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="title"><a href="{{ url_for('index') }}">Idílio Efêmero</a></h1>
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('about') }}">Sobre</a>
+            </nav>
+        </div>
+        <form class="search-form" action="{{ url_for('search') }}" method="GET">
+            <input type="text" name="query" placeholder="Pesquisar...">
+            <button type="submit">Buscar</button>
+        </form>
+    </header>
+    <hr>
+    {% block content %}{% endblock %}
+    <footer>
+        <div class="container">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank" >CC BY-NC-SA 4.0</a>
+            <p></p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/jos%C3%A9-ageu-rodrigues-da-silva/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/Ageursilva" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
