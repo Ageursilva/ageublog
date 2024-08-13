@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Sobre</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
-  <span class="search-icon"></span> </head>
+    <meta charset="utf-8">
+    <title>Sobre</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
+</head>
 <body>
     <header>
         <div class="container">
@@ -16,24 +16,43 @@
                 <span class="search-icon">🔍</span>
             </nav>
             <div id="search-container"></div>
+        </div>
     </header>
-  <hr>
-  <main>
-    <div class="about">
-      <h1>Sobre Nós</h1>
-      <p>Informações sobre o blog...</p>
-    </div>
-  </main>
-  <footer>
-    <div class="container">
-      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
-      <p></p>
-      <div class="social-links">
-        <a class="social-icon" href="https://www.linkedin.com/in/jos%C3%A9-ageu-rodrigues-da-silva/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i></a>
-      </div>
-    </div>
-  </footer>
-  <script src="{{ url_for('static', filename='script.js') }}"></script> 
+    
+    <hr>
+
+    <main>
+        <div class="about">
+            <h1>Sobre</h1>
+            <p>Olá, meu nome é Ageu.</p>
+            <p>
+                Faz muito tempo que tenho essa ideia de escrever coisas na internet. Na verdade, esse blog pessoal é de certo modo um desafio: o primeiro foi programá-lo, e o segundo será mantê-lo “atualizado”. Honestamente, ele será usado mais como um acervo pessoal para documentar coisas, seja algo que estou aprendendo, algo que estou lendo e vendo, ou até mesmo pensamentos.
+            </p>
+            <p>
+                Recentemente, li um pouco sobre “Jardins Digitais”. Acho que é um conceito interessante: um local na internet para cultivar pensamentos e ideias. Bom, este é meu jardim pessoal. Mas como cuidamos de um jardim? Precisamos cultivar algo, uma flor, um arbusto, uma planta. No meu caso, serão textos. Como um bom jardineiro, sabemos que podem surgir ervas daninhas, frutos pobres e galhos a podar, e isso vai aparecer por aqui. Talvez seja a manutenção de tudo. Veremos, só o tempo dirá.
+            </p>
+            <p class="quote">
+                “I wouldn't trust a man who thinks that an universe, if there is one, is something you can count on. I only decide about my universe. My universe is my eyes and my ears. Anything outside of that is hearsay.”<br>
+                — Douglas Adams
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+            <p></p>
+            <div class="social-links">
+                <a class="social-icon" href="https://www.linkedin.com/in/jos%C3%A9-ageu-rodrigues-da-silva/" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a class="social-icon" href="https://github.com/Ageursilva" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script> 
 </body>
 </html>
