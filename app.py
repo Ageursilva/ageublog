@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from datetime import datetime
+import pytz
 
 
 app = Flask(__name__)
@@ -49,7 +50,7 @@ def extract_image_and_excerpt(content):
 @app.route('/')
 def index():
     page = request.args.get('page', 1, type=int)
-    per_page = 10
+    per_page = 4
     pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=per_page, error_out=False)
     posts_with_images_and_excerpts = []
     for post in pagination.items:
@@ -109,6 +110,8 @@ def search():
         results = []
     return render_template('search_results.html', query=query, results=results)
 
+tz = pytz.timezone('America/Sao_Paulo')
+local_time = datetime.now(tz)
 
 
 if __name__ == '__main__':

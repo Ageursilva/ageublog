@@ -1,50 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>{{ post.title }} | AGEU</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <script defer src="https://chirpy.dev/bootstrapper.js" data-chirpy-domain="ageu.dev"></script>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <h1 class="title">AGEU</h1>
-            <nav>
-                <a href="{{ url_for('index') }}">Home</a>
-                <a href="{{ url_for('about') }}">Sobre</a>
-                <span class="search-icon">🔍</span>
-            </nav>
-        </div>
+      <div class="container">
+        <h1 class="title">AGEU</h1>
+        <nav>
+          <a href="{{ url_for('index') }}">Home</a>
+          <a href="{{ url_for('about') }}">Sobre</a>
+          <span class="search-icon">🔍</span>
+        </nav>
+      </div>
     </header>
-    <hr class="divider">
+    <hr class="divider" />
     <main>
-        <div class="container post">
-            <h2 class="post-title">{{ post.title }}</h2>
-            <div class="post-date">{{ post.created_at.strftime('%d %b %Y %H:%M') }}</div>
-            {% if post.image_url %}
-                <img src="{{ post.image_url }}" alt="Imagem do Post" class="post-image">
-            {% endif %}
-            <div class="content">
-                {{ post.content|safe }}
-            </div>
-            <a href="{{ url_for('index') }}" class="back-link">Voltar</a>
-        </div>
+      <div class="container post">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <div class="post-date">{{ post.created_at.strftime('%d %b %Y ') }}</div>
+        {% if post.image_url %}
+          <img src="{{ post.image_url }}" alt="Imagem do Post" class="post-image" />
+        {% endif %}
+        <div class="content">{{ post.content|safe }}</div>
+        <a href="{{ url_for('index') }}" class="back-link">Voltar</a>
+      </div>
+      <script src="https://utteranc.es/client.js" repo="Ageursilva/IdilioEfemero" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async></script>
     </main>
     <footer>
-        <div class="container">
-            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank" >CC BY-NC-SA 4.0</a>
-            <p></p>
-            <div class="social-links">
-                <a class="social-icon" href="https://www.linkedin.com/in/jos%C3%A9-ageu-rodrigues-da-silva/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i> </a> 
-            </div>
+      <div class="container">
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+        <p></p>
+        <div class="social-links">
+          <a class="social-icon" href="https://www.linkedin.com/in/jos%C3%A9-ageu-rodrigues-da-silva/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i></a>
         </div>
-        <script src="{{ url_for('static', filename='script.js') }}"></script> 
+      </div>
+      <script src="{{ url_for('static', filename='script.js') }}"></script>
     </footer>
-</body>
+  </body>
 </html>
-
-
-
-
