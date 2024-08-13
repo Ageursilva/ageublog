@@ -1,10 +1,10 @@
-# Idílio Efêmero
+# Ageu
 
-**Idílio Efêmero** é um blog pessoal com design clean e funcional, desenvolvido para compartilhar textos e artigos. Este projeto é uma forma de expressar e compartilhar ideias de maneira  prática.
+Este é meu  blog pessoal com design clean e funcional, desenvolvido para compartilhar textos e artigos. Este projeto é uma forma de expressar e compartilhar ideias de maneira  prática.
 
 ## Visão Geral
 
-O **Idílio Efêmero** oferece um layout visualmente agradável e fácil de usar, com uma abordagem simples para a criação e exibição de posts. 
+O  blog oferece um layout visualmente agradável e fácil de usar, com uma abordagem simples para a criação e exibição de posts. 
 
 ## Tecnologias Usadas
 
@@ -18,7 +18,7 @@ O **Idílio Efêmero** oferece um layout visualmente agradável e fácil de usar
 - Design clean
 - Editor de postagens utilizando o Quill.
 - Paginação para posts.
-- Links para redes sociais (Instagram, LinkedIn, GitHub).
+- Links para redes sociais ( LinkedIn, GitHub).
 - Área administrativa com autenticação para gerenciar postagens.
 
 ## Próximos Passos
@@ -34,5 +34,3 @@ Como este é um projeto pessoal, as contribuições são bem-vindas! Se você qu
 Este projeto está licenciado sob a [Licença Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br).
 
 ---
-
-Obrigado por visitar o **Idílio Efêmero**! Se você tiver perguntas ou sugestões, não hesite em entrar em contato.
