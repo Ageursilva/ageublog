@@ -2,21 +2,20 @@
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
-    <title>Idílio Efêmero</title>
+    <title>Ageu</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 class="title">Idílio Efêmero</h1>
+            <h1 class="title">AGEU</h1>
             <nav>
-                <a href="{{ url_for('index') }}">Home</a>
-                <a href="{{ url_for('about') }}">Sobre</a>
-                <i class="fas fa-search search-icon"></i> <!-- Ícone da lupa -->
+                <a href="/">Home</a>
+                <a href="/about">Sobre</a>
+                <span class="search-icon">🔍</span>
             </nav>
-            </form>
-        </div>
+            <div id="search-container"></div>
     </header>
     <hr>
     <main>
@@ -51,35 +50,6 @@
             </div>
         </div>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const searchIcon = document.querySelector('.search-icon');
-        
-            searchIcon.addEventListener('click', () => {
-                // Verifica se o formulário já foi inserido
-                if (!document.querySelector('.search-form')) {
-                    // Cria o formulário de pesquisa
-                    const searchForm = document.createElement('form');
-                    searchForm.classList.add('search-form');
-                    
-                    const searchInput = document.createElement('input');
-                    searchInput.type = 'text';
-                    searchInput.placeholder = 'Pesquisar...';
-                    
-                    const searchButton = document.createElement('button');
-                    searchButton.type = 'submit';
-                    searchButton.textContent = 'Buscar';
-                    
-                    // Adiciona o campo de texto e o botão ao formulário
-                    searchForm.appendChild(searchInput);
-                    searchForm.appendChild(searchButton);
-        
-                    // Insere o formulário logo após o ícone de pesquisa
-                    searchIcon.after(searchForm);
-                }
-            });
-        });
-        
-    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script> 
 </body>
 </html>

@@ -110,6 +110,7 @@ def search():
     return render_template('search_results.html', query=query, results=results)
 
 
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Cria as tabelas no banco de dados

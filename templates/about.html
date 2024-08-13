@@ -1,36 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Sobre - Idílio Efêmero</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+  <meta charset="utf-8">
+  <title>Sobre</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
+  <span class="search-icon"></span> </head>
 <body>
     <header>
-        <div class="title">Idílio Efêmero</div>
-        <nav>
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('about') }}">Sobre</a>
-        </nav>
-    </header>
-    <hr>
-    <main>
-        <div class="about">
-            <h1>Sobre Nós</h1>
-            <p>Informações sobre o blog...</p>
-        </div>
-    </main>
-    <footer>
         <div class="container">
-            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank" >CC BY-NC-SA 4.0</a>
-            <p></p>
-            <div class="social-links">
-                <a href="https://instagram.com/yourprofile" target="_blank">Instagram</a>
-                <a href="https://www.linkedin.com/in/jos%C3%A9-ageu-rodrigues-da-silva/" target="_blank">LinkedIn</a>
-                <a href="https://github.com/Ageursilva" target="_blank">GitHub</a>
-                
-            </div>
-        </div>
-    </footer>
+            <h1 class="title">AGEU</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">Sobre</a>
+                <span class="search-icon">🔍</span>
+            </nav>
+            <div id="search-container"></div>
+    </header>
+  <hr>
+  <main>
+    <div class="about">
+      <h1>Sobre Nós</h1>
+      <p>Informações sobre o blog...</p>
+    </div>
+  </main>
+  <footer>
+    <div class="container">
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+      <p></p>
+      <div class="social-links">
+        <a class="social-icon" href="https://www.linkedin.com/in/jos%C3%A9-ageu-rodrigues-da-silva/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+  <script src="{{ url_for('static', filename='script.js') }}"></script> 
 </body>
 </html>

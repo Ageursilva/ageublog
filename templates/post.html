@@ -2,17 +2,18 @@
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
-    <title>{{ post.title }} | Idílio Efêmero</title>
+    <title>{{ post.title }} | AGEU</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 class="title">Idílio Efêmero</h1>
+            <h1 class="title">AGEU</h1>
             <nav>
                 <a href="{{ url_for('index') }}">Home</a>
                 <a href="{{ url_for('about') }}">Sobre</a>
+                <span class="search-icon">🔍</span>
             </nav>
         </div>
     </header>
@@ -39,6 +40,7 @@
                 <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i> </a> 
             </div>
         </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script> 
     </footer>
 </body>
 </html>
