@@ -4,7 +4,7 @@
 {% if results %}
     <ul>
         {% for post in results %}
-            <li><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></li>
+            <li><a href="{{ url_for('post', post_id=post.id) }}" class="external-link">{{ post.title }} </a></li>
         {% endfor %}
     </ul>
 {% else %}

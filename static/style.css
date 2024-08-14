@@ -285,6 +285,8 @@ footer .container {
     max-width: 800px; /* Define a largura máxima do conteúdo do footer */
     margin: 0 auto;   /* Centraliza o conteúdo dentro do footer */
     text-align: center;
+    bottom: 0;
+    position: relative;
 }
 
 footer .container a {
@@ -423,9 +425,16 @@ footer .social-links a:hover {
     transition: background-color 0.3s ease;
 }
 
+.external-link {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
 .search-form button:hover {
     background-color: #1c7ed6;
 }
+
 
 
 
