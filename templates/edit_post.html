@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Editar Post | AGEU</title>
+    <title>Editar Post | Ageu</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="edit-post-container">
-        <h1 class="title">Idílio Efêmero</h1>
+        <h1 class="title">Ageu</h1>
         <h2>Editar Post</h2>
         <form method="post">
             <div class="input-group">
@@ -20,7 +20,7 @@
             </div>
             <button type="submit" class="submit-button">Salvar Alterações</button>
         </form>
-        <a href="{{ url_for('admin') }}" class="back-link">Voltar</a>
+        <a href="{{ url_for('/admin') }}" class="back-link">Voltar</a>
     </div>
 </body>
 </html>

@@ -3,13 +3,13 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1A1A1A;
-    color: #f4f4f4;
+    background-color: #011F26;
+    color: #eff7e1;
 }
 
 .title {
     text-align: center;
-    color: #f4f4f4;
+    color: #00ADB5;
     font-size: 3em;
     margin: 20px 0;
 }
@@ -22,15 +22,16 @@ nav {
 }
 
 nav a {
-    color: #f4f4f4;
+    color: #eff7e1;
     text-decoration: none;
     margin: 0 15px;
     font-weight: bold;
 }
 
 nav a:hover {
-    text-decoration: underline overline #ffffff;
+    text-decoration: underline overline #00ADB5;
 }
+
 /* Formulário de Pesquisa */
 .search-form {
     display: flex;
@@ -53,8 +54,8 @@ nav a:hover {
     padding: 10px !important;
     font-size: 1em !important;
     font-weight: bold !important;
-    color: #fff !important;
-    background-color: #1e90ff !important;
+    color: #222831 !important;
+    background-color: #00ADB5 !important;
     border: none !important;
     border-radius: 0 5px 5px 0 !important;
     cursor: pointer !important;
@@ -62,30 +63,39 @@ nav a:hover {
 }
 
 .search-form button:hover {
-    background-color: #fcfeff !important;
+    background-color: #EEEEEE !important;
 }
 
 .container {
-    max-width: 800px; /* Define uma largura máxima para o conteúdo */
-    margin: 0 auto;   /* Centraliza o conteúdo horizontalmente */
+    max-width: 800px;
+    /* Define uma largura máxima para o conteúdo */
+    margin: 0 auto;
+    /* Centraliza o conteúdo horizontalmente */
     padding: 20px;
-    text-align: justify; /* Mantém o texto justificado */
+    text-align: justify;
+    /* Mantém o texto justificado */
 }
 
 .about {
-    text-align: justify; /* Justifica o texto */
+    text-align: justify;
+    /* Justifica o texto */
 }
 
-.about h1, .about p {
-    margin: 0 auto;      /* Centraliza o texto */
-    max-width: 800px;    /* Define uma largura máxima para os parágrafos e títulos */
-    line-height: 1.8;    /* Aumenta o espaçamento entre linhas para melhorar a legibilidade */
+.about h1,
+.about p {
+    margin: 0 auto;
+    /* Centraliza o texto */
+    max-width: 800px;
+    /* Define uma largura máxima para os parágrafos e títulos */
+    line-height: 1.8;
+    /* Aumenta o espaçamento entre linhas para melhorar a legibilidade */
 }
 
 .about h1 {
-    font-size: 2.5em;    /* Aumenta o tamanho da fonte do título */
+    font-size: 2.5em;
+    /* Aumenta o tamanho da fonte do título */
     font-weight: bold;
-    color: #f4f4f4;
+    color: #EEEEEE;
     margin-bottom: 30px;
 }
 
@@ -98,24 +108,27 @@ nav a:hover {
 .about hr {
     border: 0;
     height: 1px;
-    background: #4b5563;
+    background: #393E46;
     margin: 30px 0;
 }
 
 nav a {
-    font-size: 18px; /* Ajuste o tamanho das fontes dos links de navegação */
-    color: #f4f4f4; /* Mantém a cor clara */
+    font-size: 18px;
+    /* Ajuste o tamanho das fontes dos links de navegação */
+    color: #EEEEEE;;
+    /* Mantém a cor clara */
 }
 
 nav a:hover {
-    color: #9ca3af; /* Um tom mais claro ao passar o mouse */
+    color: #00ADB5;
+    /* Um tom mais claro ao passar o mouse */
     text-decoration: none;
 }
 
 .title {
-    font-size: 2.5em;
+    font-size: 3em;
     text-align: center;
-    color: #f4f4f4;
+    color: #00ADB5;
     margin-top: 20px;
 }
 
@@ -128,9 +141,9 @@ nav a:hover {
 }
 
 .card {
-    background-color: #1A1A1A;
+    background-color: #393E46;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(250, 249, 249, 0.068);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     margin: 15px;
     padding: 20px;
     width: 300px;
@@ -158,13 +171,13 @@ nav a:hover {
 
 .card p {
     font-size: 1em;
-    color: #ccc;
+    color: #EEEEEE;;
     line-height: 1.6;
 }
 
 .card a {
     text-decoration: none;
-    color: #1e90ff;
+    color: #00ADB5;;
     font-weight: bold;
 }
 
@@ -180,7 +193,7 @@ nav a:hover {
 
 .pagination a {
     text-decoration: none;
-    color: #1e90ff;
+    color: #00ADB5;
     margin: 0 15px;
     font-weight: bold;
 }
@@ -203,18 +216,18 @@ nav a:hover {
 
 .about p {
     font-size: 1.2em;
-    color: #f4f4f4;
+    color: #EEEEEE;
     line-height: 1.6;
 }
 
 /* Página de Post */
 .post {
-    background-color: #1A1A1A;
+    background-color: #393E46;
     border-radius: 15px;
     padding: 20px;
     margin: 20px auto;
     max-width: 800px;
-    box-shadow: 0 0px 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
 }
 
 .post img {
@@ -227,13 +240,13 @@ nav a:hover {
 .post h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
-    color: #f4f4f4;
+    color:  #EEEEEE;
 }
 
 .post .content {
     font-size: 1.2em;
     line-height: 1.8;
-    color: #ccc;
+    color: #d1d5db;
 }
 
 .post p {
@@ -241,7 +254,7 @@ nav a:hover {
 }
 
 .post a {
-    color: #ffffff;
+    color: #00ADB5;
     text-decoration: none;
 }
 
@@ -254,26 +267,26 @@ nav a:hover {
     display: inline-block;
     padding: 12px 24px;
     margin-top: 20px;
-    background: #1A1A1A;
-    color: #ffffff;
+    background: #393E46;
+    color: #EEEEEE;
     text-decoration: none;
     border-radius: 5px;
     font-size: 16px;
     font-weight: bold;
     transition: background-color 0.3s ease;
     text-align: center;
-    border: 2px solid #ffffff;
+    border: 2px solid #EEEEEE;
 }
 
 .back-link:hover {
-    background: #1A1A1A;
-    border-color: #ffffff;
+    background: #222831;
+    border-color: #00ADB5;
 }
 
 /* Rodapé */
 footer {
-    background: #1A1A1A;
-    color: #f4f4f4;
+    background: #011F26;
+    color: #EEEEEE;
     padding: 20px 0;
     text-align: center;
     width: 100%;
@@ -282,15 +295,17 @@ footer {
 }
 
 footer .container {
-    max-width: 800px; /* Define a largura máxima do conteúdo do footer */
-    margin: 0 auto;   /* Centraliza o conteúdo dentro do footer */
+    max-width: 800px;
+    /* Define a largura máxima do conteúdo do footer */
+    margin: 0 auto;
+    /* Centraliza o conteúdo dentro do footer */
     text-align: center;
     bottom: 0;
     position: relative;
 }
 
 footer .container a {
-    color: #f4f4f4;
+    color: #EEEEEE;
     margin: 0 10px;
     text-decoration: none;
 }
@@ -300,7 +315,7 @@ footer .social-links {
 }
 
 footer .social-links a {
-    color: #f4f4f4;
+    color: #EEEEEE;
     margin: 0 10px;
     text-decoration: none;
 }
@@ -314,9 +329,9 @@ footer .social-links a:hover {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #333;
+    background-color: #393E46;;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
@@ -335,29 +350,29 @@ footer .social-links a:hover {
 .input-group label {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #f4f4f4;
+    color: #EEEEEE;;
 }
 
 .input-group input {
     padding: 10px;
     font-size: 1em;
     border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #444;
-    color: #f4f4f4;
+    border: 1px solid #222831;
+    background-color: #393E46;
+    color: #EEEEEE;;
 }
 
 .input-group input:focus {
     outline: none;
-    border-color: #1e90ff;
+    border-color: #00ADB5;
 }
 
 .login-button {
     padding: 12px;
     font-size: 1em;
     font-weight: bold;
-    color: #fff;
-    background-color: #1e90ff;
+    color: #222831;;
+    background-color: #00ADB5;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -365,14 +380,14 @@ footer .social-links a:hover {
 }
 
 .login-button:hover {
-    background-color: #1c7ed6;
+    background-color: #00ADB5;
 }
 
 .flash-messages {
     margin-top: 15px;
     padding: 10px;
     background-color: #f44336;
-    color: #fff;
+    color: #ffffff;
     border-radius: 5px;
     list-style: none;
     padding-left: 0;
@@ -388,14 +403,15 @@ footer .social-links a:hover {
 }
 
 .ql-editor {
-    color: #f4f4f4;
-    background-color: #444;
+    color: #EEEEEE;;
+    background-color: #393E46;
 }
 
 .ql-toolbar {
     background-color: #333;
-    border: 1px solid #444;
+    border: 1px solid #393E46;
 }
+
 .search-form {
     display: flex;
     justify-content: center;
@@ -406,9 +422,9 @@ footer .social-links a:hover {
     padding: 10px;
     font-size: 1em;
     border-radius: 5px 0 0 5px;
-    border: 1px solid #444;
-    background-color: #444;
-    color: #f4f4f4;
+    border: 1px solid #393E46;
+    background-color: #393E46;
+    color: #EEEEEE;
     width: 200px;
     box-sizing: border-box;
 }
@@ -417,8 +433,8 @@ footer .social-links a:hover {
     padding: 10px;
     font-size: 1em;
     font-weight: bold;
-    color: #fff;
-    background-color: #1e90ff;
+    color: #222831;
+    background-color: #00ADB5;
     border: none;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
@@ -426,15 +442,77 @@ footer .social-links a:hover {
 }
 
 .external-link {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
+    color: #EEEEEE;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .search-form button:hover {
-    background-color: #1c7ed6;
+    background-color: #00ADB5;
 }
 
+.admin-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #222831;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
 
+.admin-container h2 {
+    color: #EEEEEE;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.post-list {
+    margin-bottom: 20px;
+}
+
+.post-item {
+    background-color: #222831;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #EEEEEE;
+}
+
+.post-item h3 {
+    margin: 0;
+}
+
+.post-actions a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #00ADB5;
+    font-weight: bold;
+}
+
+.post-actions a:hover {
+    text-decoration: underline;
+}
+
+.create-post-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #00ADB5;
+    color: #EEEEEE;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-post-button:hover {
+    background-color: #00ADB5;
+}
 
 
