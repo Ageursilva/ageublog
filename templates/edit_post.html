@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Editar Post | Ageu</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+
 </head>
 <body>
     <div class="edit-post-container">
@@ -20,7 +22,7 @@
             </div>
             <button type="submit" class="submit-button">Salvar Alterações</button>
         </form>
-        <a href="{{ url_for('/admin') }}" class="back-link">Voltar</a>
+        <a href="{{ url_for('admin') }}" class="back-link">Voltar</a>
     </div>
 </body>
 </html>

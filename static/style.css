@@ -141,6 +141,9 @@ nav a:hover {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #393E46;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -152,32 +155,49 @@ nav a:hover {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
+    width: 100%;
+    height: 150px; /* Altura fixa da imagem */
+    object-fit: contain;
     margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #393E46;
 }
 
+.card h2 {
+    font-size: 1.5rem;
+    color: #EEEEEE;
+    margin-bottom: 15px;
+    min-height: 3em; /* Altura mínima do título para padronizar */
+    line-height: 1.5em; /* Altura da linha do título */
+    overflow: hidden;
+}
 .card h3 {
     font-size: 1.6em;
     margin: 10px 0;
 }
 
 .card p {
-    font-size: 1em;
-    color: #EEEEEE;;
-    line-height: 1.6;
+    color: #EEEEEE;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6; /* Limitar a 6 linhas */
+    -webkit-box-orient: vertical;
 }
 
 .card a {
+    align-self: flex-end;
+    margin-top: 10px;
+    color: #00ADB5;
     text-decoration: none;
-    color: #00ADB5;;
     font-weight: bold;
 }
 
