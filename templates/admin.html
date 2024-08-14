@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Criar Novo Post | AGEU</title>
+    <title>Gerenciar Posts | Idílio Efêmero</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <style>
-        /* Custom styles for the post creation page */
-        .create-post-container {
+        /* Custom styles for the admin page */
+        .admin-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
@@ -17,41 +17,43 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .create-post-container h2 {
+        .admin-container h2 {
             color: #f4f4f4;
             text-align: center;
             margin-bottom: 20px;
         }
 
-        .input-group {
+        .post-list {
             margin-bottom: 20px;
         }
 
-        .input-group label {
-            font-weight: bold;
-            color: #f4f4f4;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .input-group input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            font-size: 1em;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+        .post-item {
             background-color: #444;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             color: #f4f4f4;
         }
 
-        .ql-container {
-            height: 300px;
-            background-color: #fff;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        .post-item h3 {
+            margin: 0;
         }
 
-        .submit-button {
+        .post-actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #1e90ff;
+            font-weight: bold;
+        }
+
+        .post-actions a:hover {
+            text-decoration: underline;
+        }
+
+        .create-post-button {
             display: inline-block;
             padding: 12px 24px;
             background-color: #1e90ff;
@@ -60,12 +62,13 @@
             border-radius: 5px;
             font-size: 16px;
             font-weight: bold;
-            border: none;
+            margin-top: 20px;
+            text-align: center;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .submit-button:hover {
+        .create-post-button:hover {
             background-color: #1c7ed6;
         }
 
@@ -81,49 +84,61 @@
             text-decoration: underline;
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var quill = new Quill('#content', {
-                theme: 'snow',
-                modules: {
-                    toolbar: [
-                        [{ 'color': [] }, { 'background': [] }],
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'script': 'sub' }, { 'script': 'super' }],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        [{ 'indent': '-1'}, { 'indent': '+1' }],
-                        [{ 'align': [] }],
-                        ['link', 'image', 'video'],
-                        ['clean']  // Botão para limpar a formatação
-                    ]
-                }
-            });
-            
-            document.querySelector('form').addEventListener('submit', function(event) {
-                document.querySelector('input[name="content"]').value = quill.root.innerHTML;
-            });
-        });
-    </script>
 </head>
 <body>
-    <div class="create-post-container">
+    <div class="admin-container">
         <h1 class="title">Idílio Efêmero</h1>
-        <h2>Criar Novo Post</h2>
-        <form method="post">
-            <div class="input-group">
+        <h2>Gerenciar Posts</h2>
+
+        <!-- List of posts -->
+        <div class="post-list">
+            {% for post in posts %}
+            <div class="post-item">
+                <h3>{{ post.title }}</h3>
+                <div class="post-actions">
+                    <a href="{{ url_for('edit_post', post_id=post.id) }}">Editar</a>
+                    <a href="{{ url_for('delete_post', post_id=post.id) }}" onclick="return confirm('Tem certeza que deseja excluir este post?');">Excluir</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Button to create a new post -->
+        <a href="{{ url_for('create_post') }}" class="create-post-button">Criar Novo Post</a>
+
+        {% if creating_new_post or post_to_edit %}
+        <form method="POST">
+            <div class="form-group">
                 <label for="title">Título:</label>
-                <input type="text" id="title" name="title" required>
+                <input type="text" id="title" name="title" class="form-control" value="{{ post_to_edit.title if post_to_edit else '' }}" required>
             </div>
-            <div class="input-group">
+            <div class="form-group">
                 <label for="content">Conteúdo:</label>
-                <!-- Create a container for the Quill editor -->
-                <div id="content"></div>
-                <input type="hidden" name="content" required>
+                <div id="editor"></div>
+                <input type="hidden" name="content" id="content">
             </div>
-            <button type="submit" class="submit-button">Publicar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
+        {% endif %}
+
         <a href="{{ url_for('index') }}" class="back-link">Voltar</a>
     </div>
+
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow',
+            placeholder: 'Escreva seu post aqui...'
+        });
+
+        // Se estamos editando um post, carrega o conteúdo
+        {% if post_to_edit %}
+        quill.root.innerHTML = `{{ post_to_edit.content|safe }}`;
+        {% endif %}
+
+        // Captura o conteúdo do Quill antes de enviar o formulário
+        document.querySelector('form').onsubmit = function() {
+            document.querySelector('#content').value = quill.root.innerHTML;
+        };
+    </script>
 </body>
 </html>

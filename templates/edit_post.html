@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Editar Post | AGEU</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="edit-post-container">
+        <h1 class="title">Idílio Efêmero</h1>
+        <h2>Editar Post</h2>
+        <form method="post">
+            <div class="input-group">
+                <label for="title">Título:</label>
+                <input type="text" id="title" name="title" value="{{ post.title }}" required>
+            </div>
+            <div class="input-group">
+                <label for="content">Conteúdo:</label>
+                <textarea id="content" name="content" required>{{ post.content }}</textarea>
+            </div>
+            <button type="submit" class="submit-button">Salvar Alterações</button>
+        </form>
+        <a href="{{ url_for('admin') }}" class="back-link">Voltar</a>
+    </div>
+</body>
+</html>

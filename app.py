@@ -6,11 +6,10 @@ from functools import wraps
 from datetime import datetime
 import pytz
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'd219b88288751e5a9a896e4db3e1500b' 
+app.config['SECRET_KEY'] = 'd219b88288751e5a9a896e4db3e1500b'
 db = SQLAlchemy(app)
 
 # Definição do modelo User
@@ -28,7 +27,7 @@ class User(db.Model):
 # Definição do modelo Post
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
@@ -80,22 +79,51 @@ def post(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('post.html', post=post)
 
-@app.route('/admin', methods=['GET', 'POST'])
+@app.route('/admin', methods=['GET'])
 @login_required  # Protege a rota com o decorator
 def admin():
+    posts = Post.query.all()
+    return render_template('admin.html', posts=posts)
+
+# Rota para criar um novo post
+@app.route('/create_post', methods=['GET', 'POST'])
+def create_post():
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
         new_post = Post(title=title, content=content)
         db.session.add(new_post)
         db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('admin.html')
+        flash('Post criado com sucesso!')
+        return redirect(url_for('admin'))
+    return render_template('admin.html', creating_new_post=True)
+
+# Rota para editar um post existente
+@app.route('/edit_post/<int:post_id>', methods=['GET', 'POST'])
+def edit_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if request.method == 'POST':
+        post.title = request.form['title']
+        post.content = request.form['content']
+        db.session.commit()
+        flash('Post atualizado com sucesso!')
+        return redirect(url_for('admin'))
+    return render_template('admin.html', post_to_edit=post)
+
+# Rota para excluir um post
+@app.route('/delete_post/<int:post_id>', methods=['GET', 'POST'])
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Post excluído com sucesso!')
+    return redirect(url_for('admin'))
 
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('login'))
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -113,10 +141,7 @@ def search():
 tz = pytz.timezone('America/Sao_Paulo')
 local_time = datetime.now(tz)
 
-
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Cria as tabelas no banco de dados
     app.run(debug=True)
-
-    
