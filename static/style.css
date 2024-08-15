@@ -282,6 +282,13 @@ nav a:hover {
     text-decoration: underline;
 }
 
+.post-content img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
 /* Link de Voltar */
 .back-link {
     display: inline-block;
@@ -535,4 +542,40 @@ footer .social-links a:hover {
     background-color: #00ADB5;
 }
 
+
+blockquote {
+    font-style: italic;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border-left: 5px solid #00ADB5; /* cor da borda lateral */
+    background-color: #393E46; /* cor de fundo */
+    color: #EEEEEE; /* cor do texto */
+    max-width: 600px;
+}
+
+blockquote cite {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #CCCCCC; /* cor do texto do autor */
+}
+
+pre {
+    background-color: #000103; /* Cor de fundo */
+    color: #EEEEEE; /* Cor do texto */
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto; /* Permite rolagem horizontal */
+    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada */
+    max-width: 100%;
+}
+
+code {
+    background-color: #000103; /* Cor de fundo */
+    color: #00ADB5; /* Cor do texto */
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada */
+}
 

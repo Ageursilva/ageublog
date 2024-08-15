@@ -7,9 +7,9 @@ from datetime import datetime
 import pytz
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydb.db' # Modify the database path as needed
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'd219b88288751e5a9a896e4db3e1500b'
+app.config['SECRET_KEY'] = 'your_secret_key_here'
 db = SQLAlchemy(app)
 
 # Definição do modelo User

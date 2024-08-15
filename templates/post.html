@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="static\favicon.ico" />
-    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+    <script>
+      hljs.highlightAll()
+    </script>
   </head>
   <body>
     <header>
@@ -16,7 +18,7 @@
         <nav>
           <a href="{{ url_for('index') }}">Home</a>
           <a href="{{ url_for('about') }}">Sobre</a>
-          <span class="search-icon" >🔍</span>
+          <span class="search-icon">🔍</span>
         </nav>
       </div>
     </header>
