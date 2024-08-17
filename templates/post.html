@@ -5,11 +5,8 @@
     <title>{{ post.title }} | AGEU</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="static\favicon.ico" />
-    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
-    <script>
-      hljs.highlightAll()
-    </script>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
   </head>
   <body>
     <header>
@@ -32,19 +29,39 @@
         {% endif %}
         <div class="content">{{ post.content|safe }}</div>
         <a href="{{ url_for('index') }}" class="back-link">Voltar</a>
+        <!-- Script para comentários -->
+        <script src="https://utteranc.es/client.js"
+                repo="Ageursilva/IdilioEfemero"
+                issue-term="pathname"
+                label="comment"
+                theme="github-dark"
+                crossorigin="anonymous"
+                async>
+        </script>
       </div>
-      <script src="https://utteranc.es/client.js" repo="Ageursilva/IdilioEfemero" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async></script>
     </main>
     <footer>
       <div class="container">
         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
-        <p></p>
         <div class="social-links">
           <a class="social-icon" href="https://www.linkedin.com/in/jos%C3%A9-ageu-rodrigues-da-silva/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
           <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i></a>
         </div>
       </div>
-      <script src="{{ url_for('static', filename='script.js') }}"></script>
     </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Seleciona todos os blocos de código dentro do conteúdo renderizado
+        document.querySelectorAll('pre code').forEach((block) => {
+          // Aplica o Highlight.js a cada bloco de código
+          hljs.highlightElement(block);
+        });
+      });
+    </script>
+  
   </body>
 </html>

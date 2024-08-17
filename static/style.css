@@ -13,7 +13,12 @@ body {
     font-size: 3em;
     margin: 20px 0;
 }
-
+.post-title{
+    text-align: center;
+}
+.ql-align-center{
+    text-align: center;
+}
 /* Navegação */
 nav {
     text-align: center;
@@ -89,6 +94,7 @@ nav a:hover {
     /* Define uma largura máxima para os parágrafos e títulos */
     line-height: 1.8;
     /* Aumenta o espaçamento entre linhas para melhorar a legibilidade */
+    text-align: center ;
 }
 
 .about h1 {
@@ -154,7 +160,14 @@ nav a:hover {
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
 }
-
+.text-post {
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align-last: left; /* Adiciona alinhamento à esquerda na última linha */
+    hyphens: auto; /* Habilita a hifenização automática para palavras */
+}
 
 .card:hover {
     transform: translateY(-5px);
@@ -168,6 +181,7 @@ nav a:hover {
     margin-bottom: 15px;
     border-radius: 5px;
     background-color: #393E46;
+    
 }
 
 .card h2 {
@@ -209,6 +223,18 @@ nav a:hover {
 .pagination {
     text-align: center;
     margin: 30px 0;
+}
+.pagination .btn {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #00ADB5;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pagination .btn:hover {
+    background-color: #008C9E;
 }
 
 .pagination a {
@@ -265,8 +291,9 @@ nav a:hover {
 
 .post .content {
     font-size: 1.2em;
-    line-height: 1.8;
+    line-height: 1.2em;
     color: #d1d5db;
+    
 }
 
 .post p {
@@ -318,7 +345,9 @@ footer {
     text-align: center;
     width: 100%;
     bottom: 0;
-    position: relative;
+    position: static;
+    left: 0;
+    right: 0;
 }
 
 footer .container {
@@ -579,3 +608,64 @@ code {
     font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada */
 }
 
+.hljs {
+    background-color: #393E46; /* Cor de fundo do código */
+    color: #EEEEEE; /* Cor do texto padrão */
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    max-width: 100%;
+}
+
+.hljs-comment,
+.hljs-quote {
+    color: #999999; /* Cor dos comentários */
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+    color: #00ADB5; /* Cor das palavras-chave */
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-addition {
+    color: #FFD700; /* Cor das strings */
+}
+
+.hljs-literal {
+    color: #D8695A; /* Cor dos literais */
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5em;
+    }
+
+    .card {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .post {
+        padding: 15px;
+    }
+
+    .search-form input[type="text"] {
+        width: 100%;
+    }
+
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+}

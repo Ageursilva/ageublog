@@ -27,6 +27,14 @@
             </div>
             {% endfor %}
         </div>
+        <div class="pagination">
+            {% if prev_url %}
+            <a href="{{ prev_url }}" class="btn btn-primary">Anterior</a>
+            {% endif %}
+            {% if next_url %}
+            <a href="{{ next_url }}" class="btn btn-primary">Próximo</a>
+            {% endif %}
+        </div>
 
         <!-- Button to create a new post -->
         <a href="{{ url_for('create_post') }}" class="create-post-button">Criar Novo Post</a>

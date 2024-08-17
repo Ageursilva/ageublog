@@ -5,14 +5,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from datetime import datetime
 import pytz
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydb.db' # Modify the database path as needed
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your_secret_key_here'
+app.config['SECRET_KEY'] = 'd219b88288751e5a9a896e4db3e1500b'
 db = SQLAlchemy(app)
-
-# Definição do modelo User
+POSTS_PER_PAGE = 4
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
@@ -43,7 +41,7 @@ def login_required(f):
 def extract_image_and_excerpt(content):
     soup = BeautifulSoup(content, 'html.parser')
     image = soup.find('img')
-    excerpt = soup.get_text()[:300]  # Exibir as primeiras 300 caracteres do texto
+    excerpt = soup.get_text()[:150]  # Exibir as primeiras 300 caracteres do texto
     return image['src'] if image else None, excerpt
 
 @app.route('/')
@@ -82,9 +80,13 @@ def post(post_id):
 @app.route('/admin', methods=['GET'])
 @login_required  # Protege a rota com o decorator
 def admin():
-    posts = Post.query.all()
-    return render_template('admin.html', posts=posts)
-
+    # Obtém o número da página a partir da URL, padrão é 1
+    page = request.args.get('page', 1, type=int)
+    # Busca os posts do banco de dados com paginação
+    posts = Post.query.order_by(Post.created_at.desc()).paginate(page=page, per_page=POSTS_PER_PAGE, error_out=False)
+    next_url = url_for('admin', page=posts.next_num) if posts.has_next else None
+    prev_url = url_for('admin', page=posts.prev_num) if posts.has_prev else None
+    return render_template('admin.html', posts=posts.items, next_url=next_url, prev_url=prev_url)
 # Rota para criar um novo post
 @app.route('/create_post', methods=['GET', 'POST'])
 def create_post():
