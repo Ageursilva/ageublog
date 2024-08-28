@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from datetime import datetime
-import pytz
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -140,8 +140,6 @@ def search():
         results = []
     return render_template('search_results.html', query=query, results=results)
 
-tz = pytz.timezone('America/Sao_Paulo')
-local_time = datetime.now(tz)
 
 if __name__ == '__main__':
     with app.app_context():
