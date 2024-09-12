@@ -1,88 +1,141 @@
-# Ageu
 
-Este é o modelo que desenvolvi para o  meu ["Jardim Digital"](https://weeklymusings.net/weekly-musings-092), a ideia aqui é que você possa utilizar e aprimorar para seu uso, tentei criar algo clean, simples e agradável visualmente para que todos que quiserem possam utilizar. 
-Fique a vontade para usa-lo, editar e melhorar e desculpe pela bagunça no código, um dia irei refatorar .
+# Ageu Blog Template
+Este é o modelo que desenvolvi para o meu ["Jardim Digital"](https://weeklymusings.net/weekly-musings-092) uso ele em meu [blog](https://ageu.tech/) pessoal. A ideia aqui é que você possa utilizar e aprimorar para o seu uso. Tentei criar algo clean, simples e visualmente agradável para que qualquer pessoa possa usar. 
+
+
+Fique à vontade para usá-lo, editar e melhorar. Desculpe pela bagunça no código, um dia irei refatorar 😄.
+
 
 ## Visão Geral
 
-O blog oferece um layout visualmente agradável e fácil de usar, com uma abordagem simples para a criação e exibição de posts.
+O blog oferece um layout clean e responsivo, com uma estrutura simplificada para a criação e exibição de posts. Ele é ideal para quem quer um espaço de escrita minimalista, sem distrações.
 
 ## Tecnologias Usadas
 
-- **HTML5** e **CSS3** para a estrutura e estilo do site.
-- **JavaScript** e **Quill** para a edição de posts.
-- **Flask** para o back-end e gerenciamento de posts.
-- **SQLite** para o banco de dados.
-- **Python** para lógica de back-end.
-- **Jinja2** para renderização de templates.
-- **Utteranc** para comentários nos posts.
+- **Front-end**: HTML5, CSS3, JavaScript (Quill para o editor).
+- **Back-end**: Flask, Jinja2, SQLite, Python.
+- **Integrações**: Utteranc para comentários.
 
 ## Funcionalidades
 
-- Design clean e responsivo.
-- Editor de postagens utilizando o Quill.
-- Paginação para posts.
-- Área administrativa com autenticação para gerenciar postagens.
-- Comentários nos posts utilizando Utteranc.
+- Design simples e responsivo.
+- Editor de posts com Quill.
+- Paginação de posts.
+- Área administrativa com autenticação.
+- Sistema de comentários com Utteranc.
 
+## Como Instalar e Configurar
 
-## Como Configurar
+### 1. Clonar o Repositório
 
-### Gerando a Secret Key
-
-Para gerar a `SECRET_KEY` para o Flask, execute o seguinte código em um ambiente Python:
-```python
-    python import secrets
-    print(secrets.token_hex(16)) 
+```bash
+git clone https://github.com/Ageursilva/IdilioEfemero.git
+cd IdilioEfemero` 
 ```
-Copie a chave gerada e adicione-a ao seu arquivo de configuração (como `config.py` ou diretamente no código).
+### 2. Criar Ambiente Virtual e Instalar Dependências
 
- ## Criando um Usuário para o Banco de Dados
+```bash
+python -m venv venv
+source venv/bin/activate  # No Windows use `venv\Scripts\activate`
+pip install -r requirements.txt`` 
+```
+### 3. Configurar Variáveis de Ambiente
 
-Para criar um usuário administrador no banco de dados, siga os passos abaixo:
+Crie um arquivo `.env` ou modifique o arquivo `config.py` para incluir a `SECRET_KEY` e outras configurações.
 
- 1. **Iniciar o Flask:** Execute o comando `flask run` no terminal.   
- 2. **Acessar o shell do Flask:** Pressione Ctrl+C para interromper o servidor e, em seguida, execute `flask shell`.  
- 3. **Colar o código:** Cole o código Python no shell e pressione Enter para executá-lo.
+**Gerando a SECRET_KEY:**
+
+```python
+import secrets
+print(secrets.token_hex(16))  # Gera uma chave secreta` 
+```
+Adicione a chave no arquivo `app.py`:
+
+`app.config['SECRET_KEY'] =  'coloque_sua_chave_aqui'` 
+
+### 4. Inicializar o Banco de Dados
+
+```bash
+flask db init
+flask db migrate
+flask db upgrade 
+```
+### 5. Criar um Usuário Administrador
+
+```bash
+flask shell
+```
+Dentro do shell do Flask, execute o seguinte código:
 
 ```python
 from app import app, db, User
-
 with app.app_context():
-    admin = User(username='User')
-    admin.set_password('Password')
+    admin = User(username='admin')
+    admin.set_password('adminpassword')
     db.session.add(admin)
-    db.session.commit()
+    db.session.commit()` 
 ```
-Substitua `'User'` pelo nome de usuário desejado e `'Password'` pela senha que deseja atribuir.
-
-## Configurando o Utteranc
-O Utteranc é utilizado para permitir que os visitantes comentem nos posts do blog utilizando suas contas GitHub. Ele já está configurado no arquivo `post.html`. Para personalizar ou ajustar a configuração, siga estes passos:
+### 6. Configurando o Utteranc para Comentários
 
 1.  Acesse o repositório do [Utteranc no GitHub](https://github.com/apps/utterances) e instale ele em seu repositório.
-2.  No arquivo `post.html`, edite o código necessário para carregar o Utteranc:
+2.  No arquivo `post.html`, edite o código do Utteranc:
 
-``` html 
- <script src="https://utteranc.es/client.js"
+```html
+<script src="https://utteranc.es/client.js"
 	 repo="seu-usuario/seu-repositorio"
 	 issue-term="pathname"
 	 theme="github-light"
 	 crossorigin="anonymous"
 	 async>
-</script>
+</script> 
 ```
-3. Substitua `"seu-usuario/seu-repositorio"` pelo caminho do seu repositório GitHub onde os comentários serão armazenados.
-## Próximos Passos
+Substitua `"seu-usuario/seu-repositorio"` pelo caminho do seu repositório GitHub.
+## RSS e Sitemap
 
-Estamos trabalhando na melhoria da documentação e na adição de novas funcionalidades. Em breve, você encontrará uma documentação mais detalhada sobre como configurar e usar o blog, bem como informações sobre possíveis extensões e personalizações.
+Atualmente, o blog ainda não gera automaticamente o **RSS feed** e o **sitemap**. Isso significa que, para quem deseja utilizar essas funcionalidades, será necessário criar e atualizar manualmente ambos os arquivos, fiquei olhando algumas formas de fazer isso automaticamente, mas a realidade é que apenas fui atrás disso depois de publicar o site, então, em algum momento devo corrigir essa questão.
 
-## Contribuição
+## Contribuições
 
-Como este é um projeto pessoal, as contribuições são bem-vindas!  Você pode fazer um fork e alterar da forma que desejar.
+Contribuições são bem-vindas! Abra um issue ou envie um pull request.
 
 ## Licença
 
 Este projeto está licenciado sob a [Licença Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br).
 
-> *"Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity.” 
-> 	 **Aaron Swartz***
+> "Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity." — **Aaron Swartz**
+> 
+## Colaboradores
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/ageursilva/">
+        <img src="https://github.com/Ageursilva.png" width="100px;"><br />
+        <sub><b>Ageu Silva</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://www.instagram.com/hugo.vi/">
+        <img src="https://previews.dropbox.com/p/thumb/ACbeSipP9dU-4FL-8akxJ_NBk_UC98jGOFFiSabphq7M2PpgIMJ2VUlX_CLyl5_SJMPjZjszmTYB_pCt3Fw4t_B_h1qXNX3T7Aowhu7xQnZAcMNuTuQY2g_Bg_nBo_KoTC5ymsE3G3OHdfC-mMZNoenUjaLGBgV5uiY76NEw-DYZ0aaDgy_TNTnLrdHVYAU9p1yer1FVpJjET0l1iH89qpLbaSZiXp2OcgE_-WGOtLL73E1AsE4Ao5Abk0ZIkXVUkgXx73_CCcopa3YWbKTnZmrTcqGzQoo8p_0zDk6h621Yrw6NkHtmXZYvOf72H38FYTEmqNl9KTJZuvZxsn5mUgMJ/p.png?is_prewarmed=true" width="100px;"><br />
+        <sub><b>Vitor Hugo </b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+<p align="center">
+<a href="https://github.com/Ageursilva/ageu-blog-template">
+<img src="https://img.shields.io/github/forks/Ageursilva/IdilioEfemero?style=social&label=Fork" alt="Forks">
+</a>
+<a href="https://github.com/Ageursilva/ageu-blog-template">
+<img src="https://img.shields.io/github/stars/Ageursilva/IdilioEfemero?style=social&label=Star" alt="Stars">
+</a>
+<img src="https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg" alt="License: CC BY-NC-SA 4.0">
+<img src="https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow.svg" alt="Status: Em Desenvolvimento">
+<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python">
+<img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
+
+</p> 
