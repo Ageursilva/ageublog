@@ -127,10 +127,10 @@ Este projeto está licenciado sob a [Licença Creative Commons BY-NC-SA 4.0](htt
 
 
 <p align="center">
-<a href="https://github.com/Ageursilva/ageu-blog-template">
+<a href="https://github.com/Ageursilva/IdilioEfemero">
 <img src="https://img.shields.io/github/forks/Ageursilva/IdilioEfemero?style=social&label=Fork" alt="Forks">
 </a>
-<a href="https://github.com/Ageursilva/ageu-blog-template">
+<a href="https://github.com/Ageursilva/IdilioEfemero">
 <img src="https://img.shields.io/github/stars/Ageursilva/IdilioEfemero?style=social&label=Star" alt="Stars">
 </a>
 <img src="https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg" alt="License: CC BY-NC-SA 4.0">
