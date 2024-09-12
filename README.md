@@ -114,9 +114,9 @@ Este projeto está licenciado sob a [Licença Creative Commons BY-NC-SA 4.0](htt
       </a>
     </td>
     <td align="center">
-      <a href="https://www.instagram.com/hugo.vi/">
-        <img src="https://previews.dropbox.com/p/thumb/ACbeSipP9dU-4FL-8akxJ_NBk_UC98jGOFFiSabphq7M2PpgIMJ2VUlX_CLyl5_SJMPjZjszmTYB_pCt3Fw4t_B_h1qXNX3T7Aowhu7xQnZAcMNuTuQY2g_Bg_nBo_KoTC5ymsE3G3OHdfC-mMZNoenUjaLGBgV5uiY76NEw-DYZ0aaDgy_TNTnLrdHVYAU9p1yer1FVpJjET0l1iH89qpLbaSZiXp2OcgE_-WGOtLL73E1AsE4Ao5Abk0ZIkXVUkgXx73_CCcopa3YWbKTnZmrTcqGzQoo8p_0zDk6h621Yrw6NkHtmXZYvOf72H38FYTEmqNl9KTJZuvZxsn5mUgMJ/p.png?is_prewarmed=true" width="100px;"><br />
-        <sub><b>Vitor Hugo </b></sub>
+      <a href="https://www.linkedin.com/in/vitor-alvim-604080319">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHqC0P0yE_BYQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721239872107?e=1731542400&v=beta&t=Xg7LZ6eigtA6Ph6Mm8al-I2jLR8a44ZXKHXAjbfQYb4" width="100px;"><br />
+        <sub><b>Vitor Alvim </b></sub>
       </a>
     </td>
   </tr>
