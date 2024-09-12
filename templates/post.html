@@ -2,7 +2,13 @@
 <html lang="pt-br">
   <head>
     <meta charset="utf-8" />
-    <title>{{ post.title }} | AGEU</title>
+    <title>{{ post.title }} | Ageu</title>
+    <meta property="og:title" content="{{ post.title }}">
+    <meta property="og:description" content="{{ post.excerpt }}"> 
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ url_for('post', post_id=post.id, _external=True) }}">
+    <meta property="og:image" content="{{ post.image_url }}">
+    <meta property="og:site_name" content="Ageu">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="static\favicon.ico" />
@@ -33,15 +39,15 @@
         <div class="content">{{ post.content|safe }}</div>
         <a href="{{ url_for('index') }}" class="back-link">Voltar</a>
       </div>
-      <script src="https://utteranc.es/client.js" repo="Ageursilva/IdilioEfemero" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async></script>
+      <script src="https://utteranc.es/client.js" repo="seu-usuario/seu-repositorio" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async></script>
     </main>
     <footer>
       <div class="container">
         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
         <p></p>
         <div class="social-links">
-          <a class="social-icon" href="https://www.linkedin.com/in/jos%C3%A9-ageu-rodrigues-da-silva/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-          <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i></a>
+          <a class="social-icon" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a class="social-icon" href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
         </div>
       </div>
       <script src="{{ url_for('static', filename='script.js') }}"></script>

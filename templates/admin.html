@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8">
     <title>Painel Admin</title>
@@ -15,7 +15,6 @@
         <h1 class="title">Ageu</h1>
         <h2>Gerenciar Posts</h2>
 
-        <!-- List of posts -->
         <div class="post-list">
             {% for post in posts %}
             <div class="post-item">
@@ -36,7 +35,7 @@
             {% endif %}
         </div>
 
-        <!-- Button to create a new post -->
+   
         <a href="{{ url_for('create_post') }}" class="create-post-button">Criar Novo Post</a>
 
         {% if creating_new_post or post_to_edit %}
@@ -111,12 +110,12 @@
             placeholder: 'Escreva seu post aqui...'
         });
 
-        // Se estamos editando um post, carrega o conteúdo
+  
         {% if post_to_edit %}
         quill.root.innerHTML = `{{ post_to_edit.content|safe }}`;
         {% endif %}
 
-        // Captura o conteúdo do Quill antes de enviar o formulário
+
         document.querySelector('form').onsubmit = function() {
             document.querySelector('#content').value = quill.root.innerHTML;
         };

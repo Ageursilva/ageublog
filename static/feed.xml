@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+        <title><Nome do Seu Projeto></title>
+        <link><Link para a Página Principal do Seu Projeto></link>
+        <description><Descrição do Seu Projeto></description>
+        <lastBuildDate><Data da Última Atualização (formato rfc822)></lastBuildDate>
+        <language>pt-br</language>
+
+        <item>
+            <title><Título do Post Mais Recente></title>
+            <link><Link para o Post></link>
+            <description><Resumo do Post></description>
+            <pubDate><Data de Publicação do Post (formato rfc822)></pubDate>
+        </item>
+
+        </channel>
+</rss>

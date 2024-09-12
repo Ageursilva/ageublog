@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchIcon = document.querySelector('.search-icon');
 
     searchIcon.addEventListener('click', () => {
-        // Verifica se o formulário já foi inserido
+
         if (!document.querySelector('.search-form')) {
-            // Cria o formulário de pesquisa
+   
             const searchForm = document.createElement('form');
             searchForm.classList.add('search-form');
             searchForm.setAttribute('action', '/search');
@@ -19,13 +19,33 @@ document.addEventListener('DOMContentLoaded', () => {
             searchButton.type = 'submit';
             searchButton.textContent = 'Buscar';
             
-            // Adiciona o campo de texto e o botão ao formulário
+        
             searchForm.appendChild(searchInput);
             searchForm.appendChild(searchButton);
 
-            // Insere o formulário logo após o ícone de pesquisa
             searchIcon.after(searchForm);
         }
     });
 });
 
+document.getElementById('roll-dice-trigger').addEventListener('click', function() {
+ 
+    document.getElementById('dice-container').classList.remove('hidden');
+  
+    
+    let dice = document.getElementById('dice-result');
+    dice.textContent = "🎲";  
+    dice.classList.add('roll-animation'); 
+  
+  
+    setTimeout(function() {
+        dice.textContent = "Você tirou 20!";
+        dice.classList.remove('roll-animation');
+  
+        
+        setTimeout(function() {
+            window.location.href = homeUrl; 
+        }, 2000);
+    }, 2000);
+  });
+  

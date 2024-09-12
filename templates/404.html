@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Erro 404 - Página Não Encontrada{% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+{% block content %}
+<div class="container error-page">
+    <img src="{{ url_for('static', filename='error.svg') }}" alt="Erro 404" class="error-image">
+    <p>A página que você está procurando pode ter sido movida, excluída ou talvez você digitou o endereço errado.</p>
+
+    <h3>O que você pode fazer:</h3>
+    <ul>
+        <li> Sabe... você pode <span id="roll-dice-trigger" class="subtle-text">tentar rolar um dado? </span></li>
+        <li>Verifique a ortografia do URL.</li>
+        <li>Use a <span class="search-icon">🔍</span> para encontrar o que procura.</li>
+        <li>Volte para a <a href="{{ url_for('index') }}">página inicial</a>.</li>
+    </ul>
+
+    <div id="dice-container" class="hidden">
+        <p id="dice-result">🎲</p>
+    </div>
+</div>
+<script>
+    var homeUrl = "{{ url_for('index') }}";
+</script>
+{% endblock %}

@@ -4,11 +4,12 @@ from bs4 import BeautifulSoup
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from datetime import datetime
+from flask import send_from_directory
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'd219b88288751e5a9a896e4db3e1500b'
+app.config['SECRET_KEY'] = 'coloque_sua_chave_aqui'
 db = SQLAlchemy(app)
 POSTS_PER_PAGE = 4
 class User(db.Model):
@@ -22,14 +23,14 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-# Definição do modelo Post
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-# Decorator para proteger rotas
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -40,9 +41,30 @@ def login_required(f):
 
 def extract_image_and_excerpt(content):
     soup = BeautifulSoup(content, 'html.parser')
+
+
     image = soup.find('img')
-    excerpt = soup.get_text()[:150]  # Exibir as primeiras 300 caracteres do texto
+    
+
+    if image:
+        image.extract()
+    
+
+    paragraphs = soup.find_all('p')
+    for p in paragraphs:
+        if "Photo by" in p.get_text() or "Imagem por" in p.get_text():
+            p.extract()
+
+
+    text = soup.get_text()
+
+
+    excerpt = ' '.join(text.split())[:150]
+    
     return image['src'] if image else None, excerpt
+
+
+
 
 @app.route('/')
 def index():
@@ -58,6 +80,10 @@ def index():
             'excerpt': excerpt
         })
     return render_template('index.html', posts=posts_with_images_and_excerpts, pagination=pagination)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -78,16 +104,14 @@ def post(post_id):
     return render_template('post.html', post=post)
 
 @app.route('/admin', methods=['GET'])
-@login_required  # Protege a rota com o decorator
+@login_required 
 def admin():
-    # Obtém o número da página a partir da URL, padrão é 1
     page = request.args.get('page', 1, type=int)
-    # Busca os posts do banco de dados com paginação
     posts = Post.query.order_by(Post.created_at.desc()).paginate(page=page, per_page=POSTS_PER_PAGE, error_out=False)
     next_url = url_for('admin', page=posts.next_num) if posts.has_next else None
     prev_url = url_for('admin', page=posts.prev_num) if posts.has_prev else None
     return render_template('admin.html', posts=posts.items, next_url=next_url, prev_url=prev_url)
-# Rota para criar um novo post
+
 @app.route('/create_post', methods=['GET', 'POST'])
 def create_post():
     if request.method == 'POST':
@@ -100,7 +124,7 @@ def create_post():
         return redirect(url_for('admin'))
     return render_template('admin.html', creating_new_post=True)
 
-# Rota para editar um post existente
+
 @app.route('/edit_post/<int:post_id>', methods=['GET', 'POST'])
 def edit_post(post_id):
     post = Post.query.get_or_404(post_id)
@@ -112,7 +136,7 @@ def edit_post(post_id):
         return redirect(url_for('admin'))
     return render_template('admin.html', post_to_edit=post)
 
-# Rota para excluir um post
+
 @app.route('/delete_post/<int:post_id>', methods=['GET', 'POST'])
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
@@ -134,14 +158,26 @@ def about():
 def search():
     query = request.args.get('query')
     if query:
-        # Use SQLAlchemy para fazer a busca nos posts
+        
         results = Post.query.filter(Post.title.contains(query) | Post.content.contains(query)).all()
     else:
         results = []
     return render_template('search_results.html', query=query, results=results)
 
+@app.route('/robots.txt')
+def serve_robots():
+    return send_from_directory(app.static_folder, 'robots.txt')
+
+@app.route('/sitemap.xml') 
+def serve_sitemap():
+    return send_from_directory(app.static_folder, 'sitemap.xml') 
+
+@app.route('/feed') 
+def feed():
+    return send_from_directory(app.static_folder, 'feed.xml') 
+
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Cria as tabelas no banco de dados
+        db.create_all()  
     app.run(debug=True)
