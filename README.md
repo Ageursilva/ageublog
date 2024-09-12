@@ -30,7 +30,7 @@ O blog oferece um layout clean e responsivo, com uma estrutura simplificada para
 
 ```bash
 git clone https://github.com/Ageursilva/IdilioEfemero.git
-cd IdilioEfemero` 
+cd IdilioEfemero 
 ```
 ### 2. Criar Ambiente Virtual e Instalar Dependências
 
@@ -115,7 +115,7 @@ Este projeto está licenciado sob a [Licença Creative Commons BY-NC-SA 4.0](htt
     </td>
     <td align="center">
       <a href="https://www.linkedin.com/in/vitor-alvim-604080319">
-        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHqC0P0yE_BYQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721239872107?e=1731542400&v=beta&t=Xg7LZ6eigtA6Ph6Mm8al-I2jLR8a44ZXKHXAjbfQYb4" width="100px;"><br />
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQEL93hazzngUQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1726180928093?e=1731542400&v=beta&t=iVcPXTvjunD5bleqXIa68GNY5ovqJowzeYGCqjdKgb8" width="100px;"><br />
         <sub><b>Vitor Alvim </b></sub>
       </a>
     </td>
