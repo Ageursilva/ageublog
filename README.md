@@ -29,8 +29,8 @@ O blog oferece um layout clean e responsivo, com uma estrutura simplificada para
 ### 1. Clonar o Repositório
 
 ```bash
-git clone https://github.com/Ageursilva/IdilioEfemero.git
-cd IdilioEfemero 
+git clone https://github.com/Ageursilva/ageublog.git
+cd ageublog 
 ```
 ### 2. Criar Ambiente Virtual e Instalar Dependências
 
