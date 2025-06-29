@@ -1,36 +1,43 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <title>Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
+<body class="login-page">
+
     <div class="login-container">
         <h1 class="title">Login</h1>
+    
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flash-messages>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    
         <form method="post" class="login-form">
+            
+
+            <input type="hidden" name="csrf_token" value="{{ csrf_token_value }}">
+            
             <div class="input-group">
-                <label for="username">Usuário:</label>
+                <label for="username">Usuário</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="input-group">
-                <label for="password">Senha:</label>
+                <label for="password">Senha</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <input type="submit" value="Entrar" class="login-button">
+            <button type="submit" class="login-button">Entrar</button>
         </form>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="flash-messages">
-              {% for message in messages %}
-                <li>{{ message }}</li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
     </div>
+
 </body>
 </html>

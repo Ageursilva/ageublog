@@ -2,10 +2,11 @@
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}AGEU{% endblock %}</title>
+    <title>{% block title %}Ageu{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <script src="https://darkvisitors.com/tracker.js?project_key=ed2d29e7-0623-4272-8bce-2cce5d64fd68"></script>
 
 </head>
 <body>
@@ -15,12 +16,11 @@
             <nav>
                 <a href="/">Home</a>
                 <a href="/about">Sobre</a>
+                <a href="/radar">Radar Cultural</a>
                 <span class="search-icon">🔍</span>
             </nav>
     </header>
     <hr>
-    
-
     {% block content %}
     {% endblock %}
     
@@ -29,8 +29,8 @@
             <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
             <p></p>
             <div class="social-links">
-                <a class="social-icon" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a class="social-icon" href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a> 
+                <a class="social-icon" href="https://www.linkedin.com/in/ageursilva" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i></a> 
             </div>
         </div>
     </footer>

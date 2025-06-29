@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>{{ post.title }} | Ageu</title>
     <meta property="og:title" content="{{ post.title }}">
-    <meta property="og:description" content="{{ post.excerpt }}"> 
+    <meta property="og:description" content="{{ post.excerpt }}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ url_for('post', post_id=post.id, _external=True) }}">
     <meta property="og:image" content="{{ post.image_url }}">
@@ -24,6 +24,7 @@
         <nav>
           <a href="{{ url_for('index') }}">Home</a>
           <a href="{{ url_for('about') }}">Sobre</a>
+          <a href="{{ url_for('radar') }}">Radar Cultural</a>
           <span class="search-icon">🔍</span>
         </nav>
       </div>
@@ -36,21 +37,31 @@
         {% if post.image_url %}
           <img src="{{ post.image_url }}" alt="Imagem do Post" class="post-image" />
         {% endif %}
-        <div class="content">{{ post.content|safe }}</div>
+        <div class="content">{{ post.content | strip_leading_whitespace | safe }}</div>
         <a href="{{ url_for('index') }}" class="back-link">Voltar</a>
       </div>
-      <script src="https://utteranc.es/client.js" repo="seu-usuario/seu-repositorio" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async></script>
+      <script src="https://utteranc.es/client.js" repo="Ageursilva/ageublog" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async></script>
     </main>
     <footer>
       <div class="container">
         <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
         <p></p>
         <div class="social-links">
-          <a class="social-icon" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-          <a class="social-icon" href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+          <a class="social-icon" href="https://www.linkedin.com/in/ageursilva" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i></a>
         </div>
       </div>
       <script src="{{ url_for('static', filename='script.js') }}"></script>
+      <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const paragraphs = document.querySelectorAll('.post .content p');
+        paragraphs.forEach(p => {
+            if (p.innerHTML.trim() === '<br>') {
+                p.style.display = 'none';
+            }
+        });
+    });
+</script>
     </footer>
   </body>
 </html>
