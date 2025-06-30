@@ -43,13 +43,20 @@ def login_required(f):
 
 def extract_image_and_excerpt(content):
     soup = BeautifulSoup(content, 'html.parser')
-    image = soup.find('img')
-    if image: image.extract()
+    image_tag = soup.find('img')
+    image_src = None
+    if image_tag and image_tag.has_attr('src'):
+        image_src = image_tag['src']
+        image_tag.extract()
+    elif image_tag:
+        image_tag.extract()
     for p in soup.find_all('p'):
-        if "Photo by" in p.get_text() or "Imagem por" in p.get_text(): p.extract()
+        if "Photo by" in p.get_text() or "Imagem por" in p.get_text():
+            p.extract()
     text = soup.get_text()
     excerpt = ' '.join(text.split())[:150]
-    return image['src'] if image else None, excerpt
+    return image_src, excerpt
+
 
 @app.template_filter('strip_leading_whitespace')
 def strip_leading_whitespace(html_content):
@@ -98,16 +105,26 @@ def admin():
     prev_url = url_for('admin', page=posts.prev_num) if posts.has_prev else None
     return render_template('admin.html', posts=posts.items, next_url=next_url, prev_url=prev_url, csrf_token_value=generate_csrf())
 
-
 @app.route('/create_post', methods=['GET', 'POST'])
 @login_required
 def create_post():
     if request.method == 'POST':
         title = bleach.clean(request.form['title'])
         unsafe_content = request.form['content']
+        
         allowed_tags = ['p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3', 'blockquote', 'pre', 'code', 'ul', 'ol', 'li', 'a', 'img', 'cite']
-        allowed_attrs = {'*': ['class'], 'a': ['href', 'rel'], 'img': ['src', 'alt', 'style']}
-        content = bleach.clean(unsafe_content, tags=allowed_tags, attributes=allowed_attrs)
+        allowed_attrs = {
+            'a': ['href', 'rel'],
+            'img': ['src', 'alt', 'style', 'width', 'height'], 
+            '*': ['class'],
+        }
+        allowed_protocols = ['http', 'https', 'mailto', 'data']
+        content = bleach.clean(
+            unsafe_content,
+            tags=allowed_tags,
+            attributes=allowed_attrs,
+            protocols=allowed_protocols
+        )
         new_post = Post(title=title, content=content)
         db.session.add(new_post)
         db.session.commit()
@@ -122,9 +139,21 @@ def edit_post(post_id):
     if request.method == 'POST':
         post.title = bleach.clean(request.form['title'])
         unsafe_content = request.form['content']
+        
         allowed_tags = ['p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3', 'blockquote', 'pre', 'code', 'ul', 'ol', 'li', 'a', 'img', 'cite']
-        allowed_attrs = {'*': ['class'], 'a': ['href', 'rel'], 'img': ['src', 'alt', 'style']}
-        post.content = bleach.clean(unsafe_content, tags=allowed_tags, attributes=allowed_attrs)
+        allowed_attrs = {
+            'a': ['href', 'rel'],
+            'img': ['src', 'alt', 'style', 'width', 'height'],
+            '*': ['class'],
+        }
+        allowed_protocols = ['http', 'https', 'mailto', 'data']
+        cleaned_content = bleach.clean(
+            unsafe_content,
+            tags=allowed_tags,
+            attributes=allowed_attrs,
+            protocols=allowed_protocols
+        )
+        post.content = cleaned_content
         db.session.commit()
         flash('Post atualizado com sucesso!')
         return redirect(url_for('admin'))

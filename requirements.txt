@@ -1,6 +1,6 @@
-Flask
-Flask-SQLAlchemy
-beautifulsoup4
-bleach
-Flask-WTF
-werkzeug
+Flask==2.3.2
+Flask-WTF==1.1.1
+Flask-SQLAlchemy==3.0.3
+Werkzeug==2.3.6
+bleach==6.0.0
+beautifulsoup4==4.12.2
