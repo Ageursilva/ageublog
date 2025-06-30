@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>Ageu</title>
+    <link>{{ url_for('index', _external=True) }}</link>
+    <atom:link href="{{ url_for('feed', _external=True) }}" rel="self" type="application/rss+xml" />
+    <description>Um jardim digital de Ageu, com pensamentos sobre tecnologia, filosofia e cultura.</description>
+    <language>pt-br</language>
+    <image>
+        <url>{{ url_for('static', filename='logo.png', _external=True) }}</url>
+        <title>Ageu</title>
+        <link>{{ url_for('index', _external=True) }}</link>
+    </image>
+    
+    {% if posts %}
+    <lastBuildDate>{{ posts[0].created_at.strftime('%a, %d %b %Y %H:%M:%S GMT') }}</lastBuildDate>
+    {% endif %}
+
+    {% for data in posts_data %}
+    <item>
+        <title>{{ data.post.title }}</title>
+        <link>{{ url_for('post', post_id=data.post.id, _external=True) }}</link>
+        <description><![CDATA[{{ data.description | safe }}]]></description>
+        <guid isPermaLink="true">{{ url_for('post', post_id=data.post.id, _external=True) }}</guid>
+        <pubDate>{{ data.post.created_at.strftime('%a, %d %b %Y %H:%M:%S GMT') }}</pubDate>
+    </item>
+    {% endfor %}
+
+</channel>
+</rss>

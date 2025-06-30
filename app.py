@@ -190,13 +190,27 @@ def serve_sitemap():
     response = make_response(template); response.headers['Content-Type'] = 'application/xml'; return response
 @app.route('/feed') 
 def feed():
-    posts = Post.query.filter(Post.title != "No Radar").order_by(Post.created_at.desc()).limit(15).all()
+    posts = Post.query.filter(Post.title != "No Radar").order_by(Post.created_at.desc()).all()
     posts_data = []
     for post in posts:
-        image_url, excerpt = extract_image_and_excerpt(post.content)
-        posts_data.append({'post': post, 'excerpt': excerpt, 'image_url': image_url})
+        full_html_content = post.content
+        soup = BeautifulSoup(full_html_content, 'html.parser')
+        for img_tag in soup.find_all('img'):
+            img_tag.decompose()
+        
+        for p in soup.find_all('p'):
+            if "Photo by" in p.get_text() or "Imagem por" in p.get_text():
+                p.extract()
+        description_html = str(soup)
+        
+        posts_data.append({
+            'post': post,
+            'description': description_html,
+        })
     template = render_template('feed.xml', posts=posts, posts_data=posts_data)
-    response = make_response(template); response.headers['Content-Type'] = 'application/xml'; return response
+    response = make_response(template)
+    response.headers['Content-Type'] = 'application/xml'
+    return response
 @app.route('/radar')
 def radar():
     radar_post = Post.query.filter_by(title="No Radar").first()
