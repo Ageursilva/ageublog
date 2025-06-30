@@ -40,17 +40,8 @@
         {% endif %}
         <div class="content">{{ post.content | strip_leading_whitespace | safe }}</div>
         <a href="{{ url_for('index') }}" class="back-link">Voltar</a>
-      </div>
-      <div id="cusdis_thread"
-  data-host="https://cusdis.com"
-  data-app-id="a8c3e79b-a7f3-4542-9c8c-5d9f6ed5b68c"
-  data-page-id="{{ post.id }}"
-  data-page-url="{{ url_for('post', post_id=post.id, _external=True) }}"
-  data-page-title="{{ post.title }}"
-  data-theme="dark" 
-></div>
+    <script src="https://utteranc.es/client.js" repo="Ageursilva/ageublog" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async></script>
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-
     </main>
     <footer>
       <div class="container">
