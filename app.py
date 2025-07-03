@@ -183,11 +183,13 @@ def search():
     return render_template('search_results.html', query=query, results=results)
 @app.route('/robots.txt')
 def serve_robots(): return send_from_directory(app.static_folder, 'robots.txt')
-@app.route('/sitemap.xml') 
-def serve_sitemap():
+@app.route('/sitemap.xml')
+def sitemap():
     posts = Post.query.order_by(Post.created_at.desc()).all()
     template = render_template('sitemap.xml', posts=posts)
-    response = make_response(template); response.headers['Content-Type'] = 'application/xml'; return response
+    response = make_response(template)
+    response.headers['Content-Type'] = 'application/xml'
+    return response
 @app.route('/feed') 
 def feed():
     posts = Post.query.filter(Post.title != "No Radar").order_by(Post.created_at.desc()).all()
