@@ -1,50 +1,54 @@
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/V7V619VJBK)
 <p align="right">
-<a href="./README.md">Português</a> | <a href="./README.en.md">English</a>
+<a href="./README.md">English</a> | <a href="./README.pt.md">Portuguese</a>
 </p>
 
-  #  Ageu Blog Template
-Este é o modelo que desenvolvi para o meu ["Jardim Digital"](https://weeklymusings.net/weekly-musings-092) usado em meu [blog](https://ageu.tech/) pessoal. A ideia aqui é que você possa utilizar e aprimorar para o seu uso. Tentei criar algo clean, simples e visualmente agradável para que qualquer pessoa possa usar.
-Fique à vontade para usá-lo, bifurcar (fork) e aprimorar. O código passou por uma grande revisão de segurança e funcionalidades recentemente, além de ter sido **refatorado para uma arquitetura modular profissional**.
- 
-> "Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity." — **Aaron Swartz**  
-##  Visão Geral
+#  Ageu Blog Template
+This is the template I developed for my personal ["Digital Garden"](https://weeklymusings.net/weekly-musings-092), which I use on my personal [blog](https://ageu.tech/). The idea is for you to be able to use and improve it for your own purposes. I tried to create something clean, simple, and visually pleasing for anyone to use.
+Feel free to use it, fork it, and improve it. The code has recently undergone a major security and functionality review, and has been **refactored into a professional modular architecture**.
+> "Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity." — **Aaron Swartz**
 
-  O blog oferece um layout clean e responsivo, otimizado para uma experiência agradável. A estrutura foi pensada para ser simples de instalar e manter, ideal para quem busca um espaço de escrita pessoal e seguro. Agora com **arquitetura modular usando Blueprints do Flask**, facilitando manutenção e escalabilidade.
+##  Overview
+The blog offers a clean and responsive layout, optimized for a pleasant reading experience. The structure is designed to be simple to install and maintain, ideal for those looking for a personal and secure writing space. Now with **modular architecture using Flask Blueprints**, making maintenance and scalability easier.
+##  Features
+- Simple, responsive, and dark-themed design.
+- Post editor with [QuillJS](https://quilljs.com/).
 
-##  Funcionalidades
- -  Design simples, responsivo e com tema escuro.
--  Editor de posts com [QuillJS](https://quilljs.com/).
--   **Segurança Reforçada:**
--  Proteção contra CSRF em todos os formulários.
--  Sanitização de HTML (XSS) no conteúdo dos posts.
--   **Geração Automática de Feeds:**
--  RSS feed (`/feed`) gerado dinamicamente.
--  Sitemap (`/sitemap.xml`) gerado dinamicamente para melhor SEO.
--   **Arquitetura Modular:**
--  Separação clara de responsabilidades com Blueprints.
--  Fácil manutenção e escalabilidade.
--   Paginação de posts na home e no painel de admin.
--   Área administrativa protegida com autenticação.
-##  Tecnologias Usadas
+- **Enhanced Security:**
+-  CSRF protection on all forms.
+-  HTML sanitization (XSS) on post content.
+-  **Automatic Feed Generation:**
+-  Dynamically generated RSS feed (`/feed`).
+-  Dynamically generated Sitemap (`/sitemap.xml`) for better SEO.
+-  **Modular Architecture:**
+-  Clear separation of concerns with Blueprints.
+-  Easy maintenance and scalability.
+-  Post pagination on homepage and admin panel.
+-  Protected admin area with authentication.
+
+  
+
+##  Technologies Used
 -  **Backend**: Python, Flask, Jinja2
--  **Banco de Dados**: SQLAlchemy, SQLite
+-  **Database**: SQLAlchemy, SQLite
 -  **Frontend**: HTML5, CSS3, JavaScript
--  **Segurança**: Flask-WTF (CSRF), Bleach (XSS)
+-  **Security**: Flask-WTF (CSRF), Bleach (XSS)
 -  **Editor**: QuillJS
-##  Estrutura do Projeto
-```
 
+##  Project Structure
+
+```
 ageublog/
 │
 ├── app/
-│ ├── __init__.py # Factory do Flask, inicializa blueprints
-│ ├── config.py # Configurações da aplicação
-│ ├── models.py # Modelos SQLAlchemy (User, Post)
-│ ├── views.py # Blueprint de rotas públicas
-│ ├── admin.py # Blueprint de admin e autenticação
-│ ├── utils.py # Funções auxiliares (sanitização, autenticação)
+│ ├── __init__.py # Flask factory, initializes blueprints
+│ ├── config.py # Application configuration
+│ ├── models.py # SQLAlchemy models (User, Post)
+│ ├── views.py # Blueprint for public routes
+│ ├── admin.py # Blueprint for admin and authentication
+│ ├── utils.py # Helper functions (sanitization, auth)
 │ │
-│ ├── templates/ # Templates Jinja2
+│ ├── templates/ # Jinja2 templates
 │ │ ├── base.html
 │ │ ├── index.html
 │ │ ├── post.html
@@ -56,56 +60,51 @@ ageublog/
 │ │ ├── feed.xml
 │ │ └── sitemap.xml
 │ │
-│ └── static/ # Arquivos estáticos
-│ ├── style.css # Estilos CSS
-│ ├── script.js # Scripts JavaScript
+│ └── static/ # Static files
+│ ├── style.css # CSS styles
+│ ├── script.js # JavaScript scripts
 │ ├── logo.png
 │ └── favicon.ico
 │
-├── run.py # Ponto de entrada da aplicação
-├── requirements.txt # Dependências do projeto
-├── blog.db # Banco de dados SQLite (gerado)
-├── README.md # Este arquivo
-└── README.en.md # English version
-```
+├── run.py # Application entry point
+├── requirements.txt # Project dependencies
+├── blog.db # SQLite database (generated)
+├── README.md # This file
+└── README.pt.md # Portuguese version
 
-  
+```  
+##  How to Install and Set Up
+###  1. Clone the Repository
 
-##  Como Instalar e Configurar
-###  1. Clonar o Repositório
 ```bash
 git  clone  https://github.com/Ageursilva/ageublog.git
 cd  ageublog
+
 ```
-###  2. Criar Ambiente Virtual e Instalar Dependências
-É crucial usar um ambiente virtual para isolar as dependências do projeto.
+###  2. Create a Virtual Environment and Install Dependencies
+It's crucial to use a virtual environment to isolate project dependencies.
 ```bash
-# Criar o ambiente
+# Create the environment
 python3  -m  venv  venv
-
-# Ativar o ambiente
-
-# No Linux/macOS:
+# Activate the environment
+# On Linux/macOS:
 source  venv/bin/activate
-
-# No Windows:
-venv\Scripts\activate
-
-# Instalar as dependências
-
+# On Windows:
+# venv\Scripts\activate
+# Install dependencies
 pip  install  -r  requirements.txt
-
 ```
-###  3. Configurar a Chave Secreta
-A aplicação precisa de uma `SECRET_KEY` para funcionar. A forma mais segura é usando variáveis de ambiente.
 
-**Abra o arquivo `app/config.py`** e encontre a linha:
+###  3. Configure the Secret Key
+
+The application needs a `SECRET_KEY` to work. The most secure way is to use environment variables.
+**Open the `app/config.py` file** and find the line:
 ```python
 SECRET_KEY  = os.environ.get('SECRET_KEY', 'change-me')
 ```
-Para definir a variável de ambiente:
-**Linux/macOS:**
+To set the environment variable:
 
+**Linux/macOS:**
 ```bash
 export SECRET_KEY=$(python  -c  "import secrets; print(secrets.token_hex(16))")
 ```
@@ -114,99 +113,95 @@ export SECRET_KEY=$(python  -c  "import secrets; print(secrets.token_hex(16))")
 ```powershell
 $env:SECRET_KEY = (python -c "import secrets; print(secrets.token_hex(16))")
 ```
-Ou edite diretamente em `app/config.py` para testes locais.
-
-###  4. Inicializar o Banco de Dados
-Com o ambiente virtual ativado, rode o seguinte comando no terminal.
-
+Or edit directly in `app/config.py` for local testing.
+###  4. Initialize the Database 
+With the virtual environment activated, run the following command in your terminal:
 ```bash
-# Cria o arquivo blog.db e as tabelas
+# Creates blog.db file and tables
 python  run.py
 ```
-Na primeira execução, o Flask criará o banco de dados automaticamente.
-###  5. Criar um Usuário Administrador
+On the first run, Flask will automatically create the database.
+###  5. Create an Admin User
 
-Use o shell do Flask para criar seu primeiro usuário.
+Use Python to create your first user.
 ```bash
 python  -c  "
 from app import create_app, db
 from app.models import User
 app = create_app()
 with app.app_context():
-admin = User(username='seu_usuario')
-admin.set_password('sua_senha_forte')
+admin = User(username='your_username')
+admin.set_password('your_strong_password')
 db.session.add(admin)
 db.session.commit()
-print('Usuário criado com sucesso!')
+print('User created successfully!')
 "
 ```
-###  6. Rodar a Aplicação
-**Modo desenvolvimento:**
 
+###  6. Run the Application
+
+**Development mode:**
 ```bash
-python  run.py
+python run.py
 ```
-**Modo produção (com Gunicorn):**
+**Production mode (with Gunicorn):**
 ```bash
 gunicorn  --workers  4  --bind  0.0.0.0:8000  run:app
-```
-Acesse `http://127.0.0.1:5000` (ou `http://127.0.0.1:8000` se usar Gunicorn) no seu navegador.
-Para acessar a área de admin, vá para `/admin/login`.
-##  Arquitetura Modular
-O projeto utiliza **Blueprints do Flask** para organizar as rotas em módulos independentes:
- 
+```  
+Access `http://127.0.0.1:5000` (or `http://127.0.0.1:8000` if using Gunicorn) in your browser.
+To access the admin area, go to `/admin/login`.
+
+##  Modular Architecture
+The project uses **Flask Blueprints** to organize routes into independent modules:
+
 ###  `app/__init__.py` - Factory Pattern
 
 ```python
-
 def  create_app():
-
-# Cria e configura a aplicação Flask
-# Registra todos os blueprints
-# Inicializa extensões (db, csrf)
+# Creates and configures the Flask app
+# Registers all blueprints
+# Initializes extensions (db, csrf)
 ```
+###  `app/models.py` - Data Models
 
+-  `User`: User model with authentication
+-  `Post`: Blog post model
+- 
+###  `app/views.py` - Public Routes
 
-###  `app/models.py` - Modelos de Dados
-
--  `User`: Modelo de usuário com autenticação
-
--  `Post`: Modelo de posts do blog 
-
-###  `app/views.py` - Rotas Públicas
-
--  `/`: Home com paginação
--  `/post/<id>`: Página de post
--  `/about`: Página sobre
--  `/search`: Busca de posts
+-  `/`: Home with pagination
+-  `/post/<id>`: Post page
+-  `/about`: About page
+-  `/search`: Post search
 -  `/feed`: RSS feed
--  `/sitemap.xml`: Sitemap para SEO
+-  `/sitemap.xml`: Sitemap for SEO
+- 
+###  `app/admin.py` - Admin Routes
+-  `/admin/login`: Authentication
+-  `/admin/`: Control panel
+-  `/admin/create_post`: Create new post
+-  `/admin/edit_post/<id>`: Edit post
+-  `/admin/delete_post/<id>`: Delete post
 
-###  `app/admin.py` - Rotas Administrativas
+###  `app/utils.py` - Helper Functions
+-  `login_required()`: Decorator to protect routes
+-  `clean_content()`: HTML sanitization
+-  `extract_image_and_excerpt()`: Extracts image and excerpt from posts
 
--  `/admin/login`: Autenticação
--  `/admin/`: Painel de controle
--  `/admin/create_post`: Criar novo post
--  `/admin/edit_post/<id>`: Editar post
--  `/admin/delete_post/<id>`: Deletar post
-###  `app/utils.py` - Funções Auxiliares
+##  Commenting System
+This template has been tested with several commenting solutions. Choose the one that best suits you:
+-  **Giscus:** Uses GitHub Discussions. Lightweight, modern, and supports reactions/replies.
+-  **Cusdis:** An excellent privacy-focused option that allows anonymous comments.
+-  **Utterances:** Uses GitHub Issues. A solid and simple alternative.
 
--  `login_required()`: Decorator para proteger rotas
--  `clean_content()`: Sanitização de HTML
--  `extract_image_and_excerpt()`: Extrai imagem e resumo de posts
-##  Sistema de Comentários
-Este template foi testado com várias soluções de comentários. Escolha a que melhor se adapta a você:
--  **Giscus:** Usa as "Discussions" do GitHub. Leve, moderno e com reações/respostas.
--  **Cusdis:** Excelente opção focada em privacidade que permite comentários anônimos.
--  **Utterances:** Usa as "Issues" do GitHub. Uma alternativa sólida e simples.
-Para implementar, basta substituir o script de comentários no final do arquivo `templates/post.html`.
+To implement, simply replace the comment script at the end of the `templates/post.html` file.
+##  Contributions
 
-
-##  Contribuições
-Contribuições são muito bem-vindas! Sinta-se à vontade para:
--  Abrir uma issue para relatar um bug
--  Sugerir uma melhoria
--  Enviar um pull request
-##  Licença
- Este projeto está licenciado sob a [Licença Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br).
+Contributions are very welcome! Feel free to:
+-  Open an issue to report a bug
+-  Suggest an improvement
+-  Submit a pull request
+##  License
+This project is licensed under the [Creative Commons BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 <br>
+
