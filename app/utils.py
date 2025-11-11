@@ -48,5 +48,5 @@ def extract_image_and_excerpt(content):
 def strip_leading_whitespace(html_content):
     if not html_content:
         return ''
-    pattern = r'^(\s*<p(\s[^>]*)?>(\s| |<br\s*/?>)*</p>\s*|\s*<br\s*/?>\s*)*'
+    pattern = r'^(\s*(<p[^>]*>(\s|&nbsp;)*</p>|<br\s*/?>)\s*)+'
     return re.sub(pattern, '', html_content.strip(), count=1)
