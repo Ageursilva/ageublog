@@ -4,7 +4,7 @@
 </p>
 
 #  Ageu Blog Template
-This is the template I developed for my personal ["Digital Garden"](https://weeklymusings.net/weekly-musings-092), which I use on my personal [blog](https://ageu.tech/). The idea is for you to be able to use and improve it for your own purposes. I tried to create something clean, simple, and visually pleasing for anyone to use.
+This is the template I developed for my personal ["Digital Garden"](https://weeklymusings.net/weekly-musings-092), which I use on my personal [blog](https://ageu.blog/). The idea is for you to be able to use and improve it for your own purposes. I tried to create something clean, simple, and visually pleasing for anyone to use.
 Feel free to use it, fork it, and improve it. The code has recently undergone a major security and functionality review, and has been **refactored into a professional modular architecture**.
 > "Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity." — **Aaron Swartz**
 
