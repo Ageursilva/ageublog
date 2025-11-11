@@ -3,21 +3,23 @@
 <head>
     <meta charset="utf-8">
     <title>Ageu</title>
+    <meta name="title" content="Ageu" />
+    <meta name="description" content="Um local na internet para cultivar pensamentos e ideias" />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 class="title">AGEU</h1>
+            <h1 class="title">[AG]</h1>
             <nav>
                 <a href="/">Home</a>
                 <a href="/about">Sobre</a>
                 <a href="/radar">Radar Cultural</a>
                 <a href="/feed">Feed</a>
-                <span class="search-icon">🔍</span>
+<a href="#" class="search-link"><i class="fas fa-search"></i></a>
+
             </nav>
             <div id="search-container"></div>
     </header>
@@ -31,16 +33,17 @@
                 {% endif %}
                 <h3>{{ post.post.title }}</h3>
                 <p class="text-post">{{ post.excerpt }}...</p>
-                <a href="{{ url_for('post', post_id=post.post.id) }}">Continuar Lendo</a>
+                <a href="{{ url_for('main.post', post_id=post.post.id) }}">Continuar Lendo</a>
             </div>
             {% endfor %}
         </div>
         <div class="pagination">
             {% if pagination.has_prev %}
-                <a href="{{ url_for('index', page=pagination.prev_num) }}">« Anterior</a>
+                <a href="{{ url_for('main.index', page=pagination.prev_num) }}">« Anterior</a>
             {% endif %}
             {% if pagination.has_next %}
-                <a href="{{ url_for('index', page=pagination.next_num) }}">Próximo »</a>
+                <a href="{{ url_for('main.index', page=pagination.next_num) }}">Próximo »</a>
+
             {% endif %}
         </div>
     </main>
@@ -54,8 +57,7 @@
             </div>
         </div>
     </footer>
-    <script src="{{ url_for('static', filename='script.js') }}"></script> 
-    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
 

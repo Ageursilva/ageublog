@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <title>{{ post.title }} | Ageu</title>
-    <meta property="og:title" content="{{ post.title }}">
-    <meta property="og:description" content="{{ post.excerpt }}">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="{{ url_for('post', post_id=post.id, _external=True) }}">
-    <meta property="og:image" content="{{ post.image_url }}">
-    <meta property="og:site_name" content="Ageu">
+    <meta property="og:title" content="{{ post.title }}" />
+    <meta property="og:description" content="{{ post.excerpt }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ url_for('main.post', post_id=post.id, _external=True) }}" />
+    <meta property="og:image" content="{{ post.image_url }}" />
+    <meta property="og:site_name" content="Ageu" />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="static\favicon.ico" />
@@ -20,13 +20,13 @@
   <body>
     <header>
       <div class="container">
-        <h1 class="title">AGEU</h1>
+        <h1 class="title">[AG]</h1>
         <nav>
-          <a href="{{ url_for('index') }}">Home</a>
-          <a href="{{ url_for('about') }}">Sobre</a>
-          <a href="{{ url_for('radar') }}">Radar Cultural</a>
+          <a href="{{ url_for('main.index') }}">Home</a>
+          <a href="{{ url_for('main.about') }}">Sobre</a>
+          <a href="{{ url_for('main.radar') }}">Radar Cultural</a>
           <a href="/feed">Feed</a>
-          <span class="search-icon">🔍</span>
+          <a href="#" class="search-link"><i class="fas fa-search"></i></a>
         </nav>
       </div>
     </header>
@@ -38,10 +38,10 @@
         {% if post.image_url %}
           <img src="{{ post.image_url }}" alt="Imagem do Post" class="post-image" />
         {% endif %}
-        <div class="content">{{ post.content | strip_leading_whitespace | safe }}</div>
-        <a href="{{ url_for('index') }}" class="back-link">Voltar</a>
-    <script src="https://utteranc.es/client.js" repo="Ageursilva/ageublog" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async></script>
-<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+        <div class="content">{{ post.content|strip_leading_whitespace|safe }}</div>
+        <a href="{{ url_for('main.index') }}" class="back-link">Voltar</a>
+      </div>
+      <script src="https://utteranc.es/client.js" repo="Ageursilva/ageublog" issue-term="pathname" label="comment" theme="github-dark" crossorigin="anonymous" async></script>
     </main>
     <footer>
       <div class="container">
@@ -54,15 +54,15 @@
       </div>
       <script src="{{ url_for('static', filename='script.js') }}"></script>
       <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const paragraphs = document.querySelectorAll('.post .content p');
-        paragraphs.forEach(p => {
+        document.addEventListener('DOMContentLoaded', function () {
+          const paragraphs = document.querySelectorAll('.post .content p')
+          paragraphs.forEach((p) => {
             if (p.innerHTML.trim() === '<br>') {
-                p.style.display = 'none';
+              p.style.display = 'none'
             }
-        });
-    });
-</script>
+          })
+        })
+      </script>
     </footer>
   </body>
 </html>

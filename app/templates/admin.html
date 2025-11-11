@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="admin-container">
-        <h1 class="title">Ageu</h1>
+        <h1 class="title">[AG]</h1>
         <h2>Gerenciar Posts</h2>
 
         {% if not creating_new_post and not post_to_edit %}
@@ -21,10 +21,9 @@
                 <div class="post-item">
                     <h3>{{ post.title }}</h3>
                         <div class="post-actions">
-                            <a href="{{ url_for('edit_post', post_id=post.id) }}">Editar</a>
+                            <a href="{{ url_for('admin.edit_post', post_id=post.id) }}">Editar</a>
                             
-                            <form method="POST" action="{{ url_for('delete_post', post_id=post.id) }}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este post?');">
-
+                            <form method="POST" action="{{ url_for('admin.delete_post', post_id=post.id) }}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este post?');">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token_value }}">
                                 
                                 <button type="submit" class="delete-button">Excluir</button>
@@ -39,7 +38,7 @@
                 {% if next_url %}<a href="{{ next_url }}">Próximo</a>{% endif %}
             </div>
 
-            <a href="{{ url_for('create_post') }}" class="create-post-button">Criar Novo Post</a>
+            <a href="{{ url_for('admin.create_post') }}" class="create-post-button">Criar Novo Post</a>
         {% endif %}
 
         {% if creating_new_post or post_to_edit %}
@@ -65,7 +64,7 @@
                     </div>
 
                     <div class="form-actions">
-                        <a href="{{ url_for('admin') }}" class="btn btn-secondary">Cancelar</a>
+                        <a href="{{ url_for('admin.admin_panel') }}" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-primary">
                             {% if creating_new_post %}Publicar{% else %}Salvar Alterações{% endif %}
                         </button>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  500 - Erro Interno do Servidor
+{% endblock %}
+
+{% block content %}
+  <div class="error-page">
+    <div class="error-content">
+      <h1 class="error-title">500</h1>
+      <p class="error-message">Algo deu errado no servidor.</p>
+      <p class="error-link">
+        <a href="{{ url_for('main.index') }}">Voltar para o início</a>
+      </p>
+    </div>
+  </div>
+{% endblock %}

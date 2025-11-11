@@ -17,7 +17,7 @@
     </url>
     {% for post in posts %}
     <url>
-        <loc>{{ url_for('post', post_id=post.id, _external=True) }}</loc>
+        <loc>{{ url_for('main.post', post_id=post.id, _external=True) }}</loc>
         <lastmod>{{ post.created_at.strftime('%Y-%m-%d') }}</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      {% block title %}
+        Ageu
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="https://use.fontawesome.com/releases/v6.5.2/js/all.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="title">[AG]</h1>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/about">Sobre</a>
+          <a href="/radar">Radar Cultural</a>
+          <a href="/feed">Feed</a>
+          <a href="#" class="search-link"><i class="fas fa-search"></i></a>
+        </nav>
+      </div>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <footer>
+      <div class="container">
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+        <p></p>
+        <div class="social-links">
+          <a class="social-icon" href="https://www.linkedin.com/in/ageursilva" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a class="social-icon" href="https://github.com/Ageursilva" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

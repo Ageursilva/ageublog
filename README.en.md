@@ -1,142 +1,206 @@
-# Ageu Blog Template
+<p align="right">
+<a href="./README.md">Português</a> | <a href="./README.en.md">English</a>
+</p>
+
+#  Ageu Blog Template
 This is the template I developed for my personal ["Digital Garden"](https://weeklymusings.net/weekly-musings-092), which I use on my personal [blog](https://ageu.tech/). The idea is for you to be able to use and improve it for your own purposes. I tried to create something clean, simple, and visually pleasing for anyone to use.
-
-Feel free to use it, fork it, and improve it. The code has recently undergone a major security and functionality review, so I'd call this a V2(?).
-
+Feel free to use it, fork it, and improve it. The code has recently undergone a major security and functionality review, and has been **refactored into a professional modular architecture**.
 > "Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity." — **Aaron Swartz**
 
-## Overview
-The blog offers a clean and responsive layout, optimized for a pleasant reading experience. The structure is designed to be simple to install and maintain, ideal for those looking for a personal and secure writing space.
+##  Overview
+The blog offers a clean and responsive layout, optimized for a pleasant reading experience. The structure is designed to be simple to install and maintain, ideal for those looking for a personal and secure writing space. Now with **modular architecture using Flask Blueprints**, making maintenance and scalability easier.
+##  Features
+- Simple, responsive, and dark-themed design.
+- Post editor with [QuillJS](https://quilljs.com/).
 
-## Features
-- ✅ Simple, responsive, and dark-themed design.
-- ✍️ Post editor with [QuillJS](https://quilljs.com/).
-- 🔒 **Enhanced Security:**
-    - CSRF protection on all forms.
-    - HTML sanitization (XSS) on post content.
-- ⚙️ **Automatic Feed Generation:**
-    - Dynamically generated RSS feed (`/feed`).
-    - Dynamically generated Sitemap (`/sitemap.xml`) for better SEO.
-	- Post pagination on the homepage and admin panel.
-	- Protected admin area with authentication.
-## Technologies Used
-- **Backend**: Python, Flask, Jinja2
-- **Database**: SQLAlchemy, SQLite
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Security**: Flask-WTF (CSRF), Bleach (XSS)
-- **Editor**: QuillJS
+- **Enhanced Security:**
+-  CSRF protection on all forms.
+-  HTML sanitization (XSS) on post content.
+-  **Automatic Feed Generation:**
+-  Dynamically generated RSS feed (`/feed`).
+-  Dynamically generated Sitemap (`/sitemap.xml`) for better SEO.
+-  **Modular Architecture:**
+-  Clear separation of concerns with Blueprints.
+-  Easy maintenance and scalability.
+-  Post pagination on homepage and admin panel.
+-  Protected admin area with authentication.
 
-## How to Install and Set Up
+  
 
-### 1. Clone the Repository
+##  Technologies Used
+-  **Backend**: Python, Flask, Jinja2
+-  **Database**: SQLAlchemy, SQLite
+-  **Frontend**: HTML5, CSS3, JavaScript
+-  **Security**: Flask-WTF (CSRF), Bleach (XSS)
+-  **Editor**: QuillJS
+
+##  Project Structure
+
 ```
-git clone https://github.com/Ageursilva/ageublog.git
-cd ageublog
+ageublog/
+│
+├── app/
+│ ├── __init__.py # Flask factory, initializes blueprints
+│ ├── config.py # Application configuration
+│ ├── models.py # SQLAlchemy models (User, Post)
+│ ├── views.py # Blueprint for public routes
+│ ├── admin.py # Blueprint for admin and authentication
+│ ├── utils.py # Helper functions (sanitization, auth)
+│ │
+│ ├── templates/ # Jinja2 templates
+│ │ ├── base.html
+│ │ ├── index.html
+│ │ ├── post.html
+│ │ ├── about.html
+│ │ ├── login.html
+│ │ ├── admin.html
+│ │ ├── 404.html
+│ │ ├── 500.html
+│ │ ├── feed.xml
+│ │ └── sitemap.xml
+│ │
+│ └── static/ # Static files
+│ ├── style.css # CSS styles
+│ ├── script.js # JavaScript scripts
+│ ├── logo.png
+│ └── favicon.ico
+│
+├── run.py # Application entry point
+├── requirements.txt # Project dependencies
+├── blog.db # SQLite database (generated)
+├── README.md # Portuguese version
+└── README.en.md # This file
+
+```  
+##  How to Install and Set Up
+###  1. Clone the Repository
+
+```bash
+git  clone  https://github.com/Ageursilva/ageublog.git
+cd  ageublog
+
 ```
-### 2. Create a Virtual Environment and Install Dependencies
+###  2. Create a Virtual Environment and Install Dependencies
 It's crucial to use a virtual environment to isolate project dependencies.
 ```bash
 # Create the environment
-python3 -m venv venv
+python3  -m  venv  venv
 # Activate the environment
 # On Linux/macOS:
-source venv/bin/activate
+source  venv/bin/activate
 # On Windows:
 # venv\Scripts\activate
 # Install dependencies
-pip install -r requirements.txt
+pip  install  -r  requirements.txt
 ```
 
-### 3. Configure the Secret Key
-The application needs a `SECRET_KEY` to work. The most secure way is to use environment variables, but for a quick start, you can edit it directly.
+###  3. Configure the Secret Key
 
-**Open the `app.py` file** and find the line:
-`app.config['SECRET_KEY'] = 'your_key_here'`
-
-Replace `'your_key_here'` with a strong key. To generate one, use the Python terminal:
+The application needs a `SECRET_KEY` to work. The most secure way is to use environment variables.
+**Open the `app/config.py` file** and find the line:
 ```python
-import secrets; print(secrets.token_hex(16))
+SECRET_KEY  = os.environ.get('SECRET_KEY', 'change-me')
 ```
+To set the environment variable:
 
-### 4. Initialize the Database
+**Linux/macOS:**
+```bash
+export SECRET_KEY=$(python  -c  "import secrets; print(secrets.token_hex(16))")
+```
+**Windows (PowerShell):**
+
+```powershell
+$env:SECRET_KEY = (python -c "import secrets; print(secrets.token_hex(16))")
+```
+Or edit directly in `app/config.py` for local testing.
+###  4. Initialize the Database 
 With the virtual environment activated, run the following command in your terminal:
 ```bash
-# This command uses the application context to create the .db file and tables.
-python -c "from app import db; from app.models import User, Post; db.create_all()"
+# Creates blog.db file and tables
+python  run.py
 ```
-*Note: If you have already modularized the project, adjust the import paths as needed.*
+On the first run, Flask will automatically create the database.
+###  5. Create an Admin User
 
-### 5. Create an Admin User
-Use the Flask shell to create your first user.
+Use Python to create your first user.
 ```bash
-flask shell
-```
-Inside the shell, execute the following code:
-```python
-# Import the necessary tools
-from app import db
-from app.models import User # Or import from app if not modularized
-
-# Create the user
+python  -c  "
+from app import create_app, db
+from app.models import User
+app = create_app()
+with app.app_context():
 admin = User(username='your_username')
 admin.set_password('your_strong_password')
-
-# Save to the database
 db.session.add(admin)
 db.session.commit()
-
-# Exit the shell with exit()
-exit()
+print('User created successfully!')
+"
 ```
 
-### 6. Run the Application
+###  6. Run the Application
+
+**Development mode:**
 ```bash
-flask run
+python run.py
 ```
-Access `http://127.0.0.1:5000` in your browser. To access the admin area, go to `/login`.
+**Production mode (with Gunicorn):**
+```bash
+gunicorn  --workers  4  --bind  0.0.0.0:8000  run:app
+```  
+Access `http://127.0.0.1:5000` (or `http://127.0.0.1:8000` if using Gunicorn) in your browser.
+To access the admin area, go to `/admin/login`.
 
-## Commenting System
+##  Modular Architecture
+The project uses **Flask Blueprints** to organize routes into independent modules:
+
+###  `app/__init__.py` - Factory Pattern
+
+```python
+def  create_app():
+# Creates and configures the Flask app
+# Registers all blueprints
+# Initializes extensions (db, csrf)
+```
+###  `app/models.py` - Data Models
+
+-  `User`: User model with authentication
+-  `Post`: Blog post model
+- 
+###  `app/views.py` - Public Routes
+
+-  `/`: Home with pagination
+-  `/post/<id>`: Post page
+-  `/about`: About page
+-  `/search`: Post search
+-  `/feed`: RSS feed
+-  `/sitemap.xml`: Sitemap for SEO
+- 
+###  `app/admin.py` - Admin Routes
+-  `/admin/login`: Authentication
+-  `/admin/`: Control panel
+-  `/admin/create_post`: Create new post
+-  `/admin/edit_post/<id>`: Edit post
+-  `/admin/delete_post/<id>`: Delete post
+
+###  `app/utils.py` - Helper Functions
+-  `login_required()`: Decorator to protect routes
+-  `clean_content()`: HTML sanitization
+-  `extract_image_and_excerpt()`: Extracts image and excerpt from posts
+
+##  Commenting System
 This template has been tested with several commenting solutions. Choose the one that best suits you:
-
-- **Giscus:** Uses GitHub Discussions. Lightweight, modern, and supports reactions/replies.
-- **Cusdis:** An excellent privacy-focused option that allows anonymous comments.
-- **Utterances:** Uses GitHub Issues. A solid and simple alternative.
+-  **Giscus:** Uses GitHub Discussions. Lightweight, modern, and supports reactions/replies.
+-  **Cusdis:** An excellent privacy-focused option that allows anonymous comments.
+-  **Utterances:** Uses GitHub Issues. A solid and simple alternative.
 
 To implement, simply replace the comment script at the end of the `templates/post.html` file.
+##  Contributions
 
-## Contributions
-Contributions are very welcome! Feel free to open an issue to report a bug or suggest an improvement, or submit a pull request.
-
-## License
+Contributions are very welcome! Feel free to:
+-  Open an issue to report a bug
+-  Suggest an improvement
+-  Submit a pull request
+##  License
 This project is licensed under the [Creative Commons BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 <br>
-## Contributors
-<table align="center">
-  <tr>
-    <td align="center">
-      <a href="https://www.linkedin.com/in/ageursilva/">
-        <img src="https://github.com/Ageursilva.png" width="100px;" alt="Ageu Silva"/><br />
-        <sub><b>Ageu Silva</b></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://www.linkedin.com/in/vitor-alvim-604080319">
-        <img src="https://media.licdn.com/dms/image/v2/D4D03AQF0SMMjk3UIeA/profile-displayphoto-shrink_800_800/B4DZY7t8YkG4Ac-/0/1744758622504?e=1756944000&v=beta&t=yYcfOzQWCWoHKBYZH9Qe6BBIQiToa_Y_ljLEHIPdnbc" width="100px;" alt="Vitor Alvim"/><br />
-        <sub><b>Vitor Alvim</b></sub>
-      </a>
-    </td>
-  </tr>
-</table>
 
-<p align="center">
-<a href="https://github.com/Ageursilva/ageublog">
-<img src="https://img.shields.io/github/forks/Ageursilva/ageublog?style=social&label=Fork" alt="Forks">
-</a>
-<a href="https://github.com/Ageursilva/ageublog">
-<img src="https://img.shields.io/github/stars/Ageursilva/ageublog?style=social&label=Star" alt="Stars">
-</a>
-<img src="https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg" alt="License: CC BY-NC-SA 4.0">
-<img src="https://img.shields.io/badge/Status-In_Development-yellow.svg" alt="Status: In Development">
-<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python">
-<img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
-</p>
