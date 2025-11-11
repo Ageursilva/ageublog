@@ -7,11 +7,13 @@
     --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 
 body {
     font-family: var(--font);
@@ -21,6 +23,7 @@ body {
     font-size: 18px;
 }
 
+
 a {
     color: var(--text);
     text-decoration: none;
@@ -28,9 +31,11 @@ a {
     transition: border-color 0.2s;
 }
 
+
 a:hover {
     border-color: var(--text);
 }
+
 
 img {
     max-width: 100%;
@@ -43,6 +48,7 @@ hr {
     display: none !important;
 }
 
+
 .title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -50,6 +56,7 @@ hr {
     margin: 1.5rem 0 0.5rem;
     letter-spacing: -0.5px;
 }
+
 
 nav {
     text-align: center;
@@ -60,6 +67,7 @@ nav {
     box-shadow: none !important;
 }
 
+
 nav a {
     margin: 0 1.5rem;
     font-size: 1rem;
@@ -67,9 +75,11 @@ nav a {
     color: var(--text-muted);
 }
 
+
 nav a:hover {
     color: var(--text);
 }
+
 
 .search-icon {
     display: inline-block;
@@ -81,9 +91,11 @@ nav a:hover {
     transition: color 0.2s;
 }
 
+
 .search-icon:hover {
     color: var(--text);
 }
+
 
 .container {
     max-width: 1000px;
@@ -92,30 +104,37 @@ nav a:hover {
     width: 100%;
 }
 
+
 .posts {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin: 0 auto;
-    max-width: 1000px;
+    max-width: 980px;
 }
 
+
 .card {
-    display: block;
+    display: grid;
+    grid-template-rows: 180px 72px auto;
+    gap: 0.5rem;
+    min-height: 450px;
     transition: opacity 0.2s;
 }
+
 
 .card:hover {
     opacity: 0.8;
 }
 
+
 .card img {
     width: 100%;
     height: 180px;
     object-fit: contain;
-    margin-bottom: 1rem;
     background: #000;
 }
+
 
 .post img {
     width: 100%;
@@ -135,42 +154,115 @@ nav a:hover {
     -webkit-box-orient: vertical;
 }
 
+
 .card h2 a {
     color: var(--text);
     border: none;
 }
 
+
 .card h2 a:hover {
     color: var(--text-muted);
 }
+
+
+.card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    align-self: start;
+}
+
 
 .card p {
     color: var(--text-muted);
     font-size: 0.9rem;
     line-height: 1.5;
-    margin-bottom: 0.75rem;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
-.card a.read-more {
-    font-size: 0.85rem;
+
+.card .text-post {
     color: var(--text-muted);
-    border: none;
-    text-decoration: underline;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    align-self: start;
 }
 
-.card a.read-more:hover {
+
+.card>a {
+    font-size: 0.85rem;
     color: var(--text);
+    border: none;
+    text-decoration: none;
+    align-self: flex-start;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s, transform 0.2s;
 }
+
+
+.card>a::after {
+    content: '→';
+    transition: transform 0.2s;
+}
+
+
+.card>a:hover {
+    color: #4a9eff;
+}
+
+
+.card>a:hover::after {
+    transform: translateX(4px);
+}
+
+
+.card a.read-more {
+    font-size: 0.85rem;
+    color: var(--text);
+    border: none;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+.card a.read-more::after {
+    content: '→';
+    margin-left: 0.4rem;
+    transition: transform 0.2s;
+}
+
+
+.card a.read-more:hover {
+    color: #4a9eff;
+}
+
+
+.card a.read-more:hover::after {
+    transform: translateX(4px);
+}
+
 
 .pagination {
     text-align: center;
     margin: 3rem auto 2rem;
     padding-top: 2rem;
 }
+
 
 .pagination a {
     margin: 0 1rem;
@@ -179,9 +271,11 @@ nav a:hover {
     color: var(--text);
 }
 
+
 .pagination a:hover {
     background: var(--hover);
 }
+
 
 .post {
     max-width: 720px;
@@ -189,12 +283,14 @@ nav a:hover {
     padding: 0 2rem;
 }
 
+
 .post h2 {
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 0.5rem;
 }
+
 
 .post h2+p {
     color: var(--text-muted);
@@ -204,11 +300,13 @@ nav a:hover {
     border-bottom: 1px solid var(--border);
 }
 
+
 .post img {
     width: 100%;
     margin: 2.5rem 0;
     border: 1px solid var(--border);
 }
+
 
 .post p {
     font-size: 1.15rem;
@@ -217,9 +315,11 @@ nav a:hover {
     color: var(--text-muted);
 }
 
+
 .post .content p:has(br):only-child {
     display: none;
 }
+
 
 .about {
     max-width: 720px;
@@ -227,11 +327,13 @@ nav a:hover {
     padding: 0 2rem;
 }
 
+
 .about h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 2rem;
 }
+
 
 .about p {
     font-size: 1.15rem;
@@ -240,12 +342,14 @@ nav a:hover {
     color: var(--text-muted);
 }
 
+
 .about hr {
     border: 0;
     height: 1px;
     background: var(--border);
     margin: 30px 0;
 }
+
 
 .admin-container {
     max-width: 900px;
@@ -254,14 +358,17 @@ nav a:hover {
     border: 1px solid var(--border);
 }
 
+
 .admin-container h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
 }
 
+
 .post-list {
     margin-bottom: 2rem;
 }
+
 
 .post-item {
     padding: 1rem 1.5rem;
@@ -274,9 +381,11 @@ nav a:hover {
     gap: 1rem;
 }
 
+
 .post-item:hover {
     background: var(--bg);
 }
+
 
 .post-item h3 {
     font-size: 0.95rem;
@@ -287,11 +396,13 @@ nav a:hover {
     white-space: nowrap;
 }
 
+
 .post-actions {
     display: flex;
     gap: 0.5rem;
     flex-shrink: 0;
 }
+
 
 .post-actions a {
     padding: 0.4rem 0.8rem;
@@ -300,6 +411,7 @@ nav a:hover {
     color: var(--text-muted);
     transition: all 0.2s;
 }
+
 
 .post-actions a:hover {
     background: var(--text);
@@ -319,9 +431,11 @@ nav a:hover {
     font-size: 0.9rem;
 }
 
+
 .create-post-button:hover {
     background: var(--text-muted);
 }
+
 
 .admin-form-container {
     max-width: 800px;
@@ -330,14 +444,17 @@ nav a:hover {
     border: 1px solid var(--border);
 }
 
+
 .admin-form-container h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
 }
 
+
 .input-group {
     margin-bottom: 1.5rem;
 }
+
 
 .input-group label {
     display: block;
@@ -346,6 +463,7 @@ nav a:hover {
     font-size: 0.95rem;
     color: var(--text-muted);
 }
+
 
 .input-group input[type="text"] {
     width: 100%;
@@ -357,10 +475,12 @@ nav a:hover {
     font-size: 1rem;
 }
 
+
 .input-group input:focus {
     outline: 2px solid var(--text-muted);
     outline-offset: 0;
 }
+
 
 /* Editor Quill */
 .ql-toolbar {
@@ -368,21 +488,26 @@ nav a:hover {
     border: 1px solid var(--border) !important;
 }
 
+
 .ql-toolbar .ql-stroke {
     stroke: var(--text) !important;
 }
+
 
 .ql-toolbar .ql-fill {
     fill: var(--text) !important;
 }
 
+
 .ql-toolbar .ql-picker-label {
     color: var(--text) !important;
 }
 
+
 .ql-toolbar .ql-picker-item {
     color: var(--text) !important;
 }
+
 
 .ql-toolbar button:hover .ql-stroke,
 .ql-toolbar button:hover .ql-picker-label {
@@ -390,9 +515,11 @@ nav a:hover {
     color: var(--text-muted) !important;
 }
 
+
 .ql-toolbar button:hover .ql-fill {
     fill: var(--text-muted) !important;
 }
+
 
 .ql-toolbar button.ql-active .ql-stroke,
 .ql-toolbar .ql-picker-label.ql-active {
@@ -400,18 +527,22 @@ nav a:hover {
     color: var(--text) !important;
 }
 
+
 .ql-toolbar button.ql-active .ql-fill {
     fill: var(--text) !important;
 }
+
 
 .ql-picker-options {
     background-color: var(--hover) !important;
     border-color: var(--border) !important;
 }
 
+
 .ql-picker-options .ql-picker-item:hover {
     color: var(--text) !important;
 }
+
 
 .ql-container {
     background: var(--hover);
@@ -420,6 +551,7 @@ nav a:hover {
     min-height: 350px;
 }
 
+
 .ql-editor {
     color: var(--text);
     font-family: var(--font) !important;
@@ -427,9 +559,11 @@ nav a:hover {
     line-height: 1.7;
 }
 
+
 .ql-editor.ql-blank::before {
     color: var(--text-muted) !important;
 }
+
 
 .form-actions {
     margin-top: 2rem;
@@ -437,6 +571,7 @@ nav a:hover {
     gap: 1rem;
     justify-content: flex-end;
 }
+
 
 .btn {
     padding: 0.875rem 1.75rem;
@@ -447,25 +582,30 @@ nav a:hover {
     font-size: 1rem;
 }
 
+
 .btn-primary {
     background: var(--text);
     color: var(--bg);
     border-color: var(--text);
 }
 
+
 .btn-primary:hover {
     background: var(--text-muted);
     border-color: var(--text-muted);
 }
+
 
 .btn-secondary {
     background: transparent;
     color: var(--text);
 }
 
+
 .btn-secondary:hover {
     background: var(--hover);
 }
+
 
 body.login-page {
     display: flex;
@@ -475,6 +615,7 @@ body.login-page {
     padding: 2rem;
 }
 
+
 .login-container {
     width: 100%;
     max-width: 420px;
@@ -482,14 +623,17 @@ body.login-page {
     border: 1px solid var(--border);
 }
 
+
 .login-container .title {
     font-size: 2.5rem;
     margin: 0 0 2rem 0;
 }
 
+
 .login-form .input-group {
     margin-bottom: 1.5rem;
 }
+
 
 .login-form label {
     display: block;
@@ -498,6 +642,7 @@ body.login-page {
     font-size: 0.95rem;
     color: var(--text-muted);
 }
+
 
 .login-form input {
     width: 100%;
@@ -509,10 +654,12 @@ body.login-page {
     font-size: 1rem;
 }
 
+
 .login-form input:focus {
     outline: 2px solid var(--text-muted);
     outline-offset: 0;
 }
+
 
 .login-button {
     width: 100%;
@@ -527,9 +674,11 @@ body.login-page {
     font-size: 1rem;
 }
 
+
 .login-button:hover {
     background: var(--text-muted);
 }
+
 
 .flash-messages {
     list-style: none;
@@ -540,6 +689,7 @@ body.login-page {
     color: #ff6464;
 }
 
+
 footer {
     text-align: center;
     padding: 2rem;
@@ -549,18 +699,22 @@ footer {
     font-size: 0.9rem;
 }
 
+
 footer a {
     color: var(--text-muted);
     border: none;
 }
 
+
 footer a:hover {
     color: var(--text);
 }
 
+
 .social-links {
     margin-top: 1rem;
 }
+
 
 .social-icon {
     margin: 0 0.5rem;
@@ -568,6 +722,7 @@ footer a:hover {
     font-size: 1.2rem;
     border: none;
 }
+
 
 .social-icon:hover {
     color: var(--text);
@@ -582,10 +737,12 @@ footer a:hover {
     color: var(--text-muted);
 }
 
+
 .back-link:hover {
     background: var(--hover);
     color: var(--text);
 }
+
 
 .delete-button {
     background: none;
@@ -597,6 +754,7 @@ footer a:hover {
     font-size: inherit;
 }
 
+
 .delete-button:hover {
     color: var(--text);
 }
@@ -607,53 +765,64 @@ footer a:hover {
         font-size: 16px;
     }
 
+
     .title {
         font-size: 2rem;
         margin: 1.5rem 0 0.5rem;
     }
 
+
     nav {
         padding: 0.25rem 0;
     }
+
 
     nav a {
         display: inline;
         margin: 0 0.75rem;
     }
 
+
     .container {
         padding: 0.5rem 1.5rem 3rem;
     }
+
 
     .posts {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
     }
 
+
     .card img {
         height: 140px;
     }
+
 
     .post,
     .about {
         padding: 0 1.5rem;
     }
 
+
     .post h2 {
         font-size: 1.8rem;
     }
 }
+
 
 @media (max-width: 480px) {
     .posts {
         grid-template-columns: 1fr;
     }
 
+
     nav a {
         display: block;
         margin: 0.5rem 0;
     }
 }
+
 
 .search-link {
     display: inline-block;
@@ -665,13 +834,16 @@ footer a:hover {
     transition: color 0.2s;
 }
 
+
 .search-link:hover {
     color: var(--text);
 }
 
+
 .search-link i {
     font-size: 0.9rem;
 }
+
 
 .search-form {
     display: flex;
@@ -681,6 +853,7 @@ footer a:hover {
     max-width: 600px;
     padding: 0 2rem;
 }
+
 
 .search-input {
     flex: 1;
@@ -695,13 +868,16 @@ footer a:hover {
     transition: border-color 0.2s;
 }
 
+
 .search-input::placeholder {
     color: var(--text-muted);
 }
 
+
 .search-input:focus {
     border-bottom-color: var(--text-muted);
 }
+
 
 .search-button {
     padding: 0.5rem 1rem;
@@ -716,11 +892,13 @@ footer a:hover {
     transition: color 0.2s, border-color 0.2s;
 }
 
+
 .search-button:hover {
     color: var(--text);
     border-bottom-color: var(--text);
 }
 
+
 .error-page {
     min-height: 60vh;
     display: flex;
@@ -729,10 +907,12 @@ footer a:hover {
     padding: 4rem 2rem;
 }
 
+
 .error-content {
     max-width: 600px;
     text-align: center;
 }
+
 
 .error-title {
     font-size: 8rem;
@@ -743,47 +923,6 @@ footer a:hover {
     letter-spacing: -0.05em;
 }
 
-.error-message {
-    font-size: 1.5rem;
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-}
-
-.error-link {
-    font-size: 1.1rem;
-}
-
-.error-link a {
-    color: var(--text);
-    border-bottom: 1px solid var(--text);
-}
-
-.error-link a:hover {
-    color: var(--text-muted);
-    border-bottom-color: var(--text-muted);
-}
-
-.error-page {
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
-}
-
-.error-content {
-    max-width: 600px;
-    text-align: center;
-}
-
-.error-title {
-    font-size: 8rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-    color: var(--text);
-    line-height: 1;
-    letter-spacing: -0.05em;
-}
 
 .error-message {
     font-size: 1.5rem;
@@ -791,14 +930,17 @@ footer a:hover {
     margin-bottom: 2rem;
 }
 
+
 .error-link {
     font-size: 1.1rem;
 }
+
 
 .error-link a {
     color: var(--text);
     border-bottom: 1px solid var(--text);
 }
+
 
 .error-link a:hover {
     color: var(--text-muted);
