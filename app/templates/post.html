@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ post.title }} | Ageu</title>
+  <meta name="description" content="{{ excerpt }}" />
+  <link rel="canonical" href="{{ url_for('main.post', post_id=post.id, _external=True) }}" />
+  <meta property="og:title" content="{{ post.title }}" />
+  <meta property="og:description" content="{{ excerpt }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{ url_for('main.post', post_id=post.id, _external=True) }}" />
+  {% if image_url %}
+  <meta property="og:image" content="{{ image_url }}" />
+  {% else %}
+  <meta property="og:image" content="{{ url_for('static', filename='logo.png', _external=True) }}" />
+  {% endif %}
+  <meta property="og:site_name" content="Ageu" />
+  <meta property="article:published_time" content="{{ post.created_at.isoformat() }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ post.title }}" />
+  <meta name="twitter:description" content="{{ excerpt }}" />
+  {% if image_url %}
+  <meta name="twitter:image" content="{{ image_url }}" />
+  {% else %}
+  <meta name="twitter:image" content="{{ url_for('static', filename='logo.png', _external=True) }}" />
+  {% endif %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="alternate" type="application/rss+xml" title="Ageu" href="{{ url_for('main.feed', _external=True) }}" />
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ post.title|tojson }},
+    "datePublished": {{ post.created_at.isoformat()|tojson }},
+    "description": {{ excerpt|tojson }},
+    {% if image_url %}"image": {{ image_url|tojson }},{% endif %}
+    "url": {{ url_for('main.post', post_id=post.id, _external=True)|tojson }},
+    "author": { "@type": "Person", "name": "Ageu" }
+  }
+  </script>
+</head>
+
+{% import '_icons.html' as icons %}
+<body>
+  <header>
+    <div class="container">
+      <h1 class="title">[AG]</h1>
+      <nav>
+        <a href="{{ url_for('main.index') }}">Home</a>
+        <a href="{{ url_for('main.about') }}">Sobre</a>
+        <a href="{{ url_for('main.radar') }}">Radar Cultural</a>
+        <a href="{{ url_for('main.notas') }}">Notas</a>
+        <a href="/feed" aria-label="RSS">{{ icons.icon('rss') }}</a>
+        <a href="#" class="search-link" aria-label="Buscar">{{ icons.icon('search') }}</a>
+      </nav>
+    </div>
+  </header>
+  <hr class="divider" />
+  <main>
+    <div class="container post">
+      <h2 class="post-title">{{ post.title }}</h2>
+      <div class="post-date">{{ post.created_at.strftime('%d %b %Y ') }}</div>
+      {% if post.tags %}
+      <div class="post-tags">
+        {% for tag in post.tags %}
+        <a href="{{ url_for('main.tag', tag_name=tag.name) }}" class="tag">{{ tag.name }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="content">{{ post.content|strip_leading_whitespace|safe }}</div>
+      <a href="{{ url_for('main.index') }}" class="back-link">Voltar</a>
+      <section class="comments">
+        <h3>Comentários ({{ comments|length }})</h3>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+          <p class="flash-{{ category }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% if comments %}
+        {% for comment in comments %}
+        <div class="comment">
+          <div class="comment-header">
+            {% if comment.website %}
+            <a href="{{ comment.website }}" target="_blank" rel="nofollow noopener noreferrer">{{ comment.name }}</a>
+            {% else %}
+            <strong>{{ comment.name }}</strong>
+            {% endif %}
+            {% if comment.is_author %}
+            <span class="author-badge">Autor</span>
+            {% endif %}
+            <span class="comment-date">{{ comment.created_at.strftime('%d %b %Y') }}</span>
+          </div>
+          <p>{{ comment.content }}</p>
+
+          {% if comment.replies %}
+          <div class="replies">
+            {% for reply in comment.replies %}
+            <div class="comment reply">
+              <div class="comment-header">
+                {% if reply.website %}
+                <a href="{{ reply.website }}" target="_blank" rel="nofollow noopener noreferrer">{{ reply.name }}</a>
+                {% else %}
+                <strong>{{ reply.name }}</strong>
+                {% endif %}
+                {% if reply.is_author %}
+                <span class="author-badge">Autor</span>
+                {% endif %}
+                <span class="comment-date">{{ reply.created_at.strftime('%d %b %Y') }}</span>
+              </div>
+              <p>{{ reply.content }}</p>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if is_logged %}
+          <button class="reply-btn" onclick="showReplyForm({{ comment.id }})">Responder</button>
+          <div id="reply-form-{{ comment.id }}" style="display:none;" class="reply-form">
+            <form method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="parent_id" value="{{ comment.id }}">
+              <input type="hidden" name="name" value="Ageu">
+              <div class="form-group">
+                <textarea name="content" required maxlength="1000" rows="3" placeholder="Sua resposta..."></textarea>
+              </div>
+              <button type="submit">Enviar resposta</button>
+              <button type="button" onclick="hideReplyForm({{ comment.id }})">Cancelar</button>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="no-comments">Nenhum comentário ainda. Seja o primeiro!</p>
+        {% endif %}
+
+        <div class="comment-form">
+          <h4>Deixe um comentário</h4>
+          <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="parent_id" value="">
+            {% if not is_logged %}
+            <div class="form-group">
+              <label for="name">Nome *</label>
+              <input type="text" id="name" name="name" required maxlength="100">
+            </div>
+            <div class="form-group">
+              <label for="website">Site (opcional)</label>
+              <input type="url" id="website" name="website" maxlength="200" placeholder="https://">
+            </div>
+            {% else %}
+            <input type="hidden" name="name" value="Ageu">
+            {% endif %}
+            <div class="form-group">
+              <label for="content">Comentário *</label>
+              <textarea id="content" name="content" required maxlength="1000" rows="4"></textarea>
+            </div>
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <div class="container">
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+      | <a href="{{ url_for('main.privacidade') }}">Privacidade</a>
+      <p></p>
+      <div class="social-links">
+        <a class="social-icon" href="https://www.linkedin.com/in/ageursilva" target="_blank" rel="noopener" aria-label="LinkedIn">{{ icons.icon('linkedin') }}</a>
+        <a class="social-icon" href="https://github.com/Ageursilva" target="_blank" rel="noopener" aria-label="GitHub">{{ icons.icon('github') }}</a>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const paragraphs = document.querySelectorAll('.post .content p')
+        paragraphs.forEach((p) => {
+          if (p.innerHTML.trim() === '<br>') {
+            p.style.display = 'none'
+          }
+        })
+      })
+    </script>
+    <script>
+      function showReplyForm(id) {
+        document.getElementById('reply-form-' + id).style.display = 'block';
+      }
+      function hideReplyForm(id) {
+        document.getElementById('reply-form-' + id).style.display = 'none';
+      }
+    </script>
+  </footer>
+  <script data-goatcounter="https://ageu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

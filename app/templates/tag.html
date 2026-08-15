@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ tag.name }} | Ageu</title>
+    <meta name="description" content="Posts sobre {{ tag.name }} no blog Ageu" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+
+{% import '_icons.html' as icons %}
+<body>
+    <header>
+        <div class="container">
+            <h1 class="title">[AG]</h1>
+            <nav>
+                <a href="{{ url_for('main.index') }}">Home</a>
+                <a href="{{ url_for('main.about') }}">Sobre</a>
+                <a href="{{ url_for('main.radar') }}">Radar Cultural</a>
+                <a href="{{ url_for('main.notas') }}">Notas</a>
+                <a href="/feed" aria-label="RSS">{{ icons.icon('rss') }}</a>
+                <a href="#" class="search-link" aria-label="Buscar">{{ icons.icon('search') }}</a>
+            </nav>
+        </div>
+    </header>
+    <hr class="divider" />
+    <main>
+        <div class="container">
+            <h2 class="tag-page-title"># {{ tag.name }}</h2>
+            <p class="tag-page-count">
+
+            <div class="posts">
+                {% for post in posts %}
+                <div class="card">
+                    {% if post.image_url %}
+                    <img src="{{ post.image_url }}" alt="Imagem do Post" class="post-image">
+                    {% endif %}
+                    <h3>{{ post.post.title }}</h3>
+                    <p class="text-post">{{ post.excerpt }}...</p>
+                    <a href="{{ url_for('main.post', post_id=post.post.id) }}">Continuar Lendo</a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="pagination">
+                {% if pagination.has_prev %}
+                <a href="{{ url_for('main.tag', tag_name=tag.name, page=pagination.prev_num) }}">« Anterior</a>
+                {% endif %}
+                {% if pagination.has_next %}
+                <a href="{{ url_for('main.tag', tag_name=tag.name, page=pagination.next_num) }}">Próximo »</a>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+            | <a href="{{ url_for('main.privacidade') }}">Privacidade</a>
+            <p></p>
+            <div class="social-links">
+                <a class="social-icon" href="https://www.linkedin.com/in/ageursilva" target="_blank" rel="noopener" aria-label="LinkedIn">{{ icons.icon('linkedin') }}</a>
+                <a class="social-icon" href="https://github.com/Ageursilva" target="_blank" rel="noopener" aria-label="GitHub">{{ icons.icon('github') }}</a>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </footer>
+    <script data-goatcounter="https://ageu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

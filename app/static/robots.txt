@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+
+Sitemap: https://ageu.blog/sitemap.xml
+Feed: https://ageu.blog/feed

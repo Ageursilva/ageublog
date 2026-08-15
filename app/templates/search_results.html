@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<main>
+  <div class="container search-results">
+  <h2>Resultados da busca para "{{ query }}":</h2>
+  {% if results %}
+    <ul>
+      {% for post in results %}
+        <li>
+          <a href="{{ url_for('main.post', post_id=post.id) }}" class="external-link">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nenhum resultado encontrado.</p>
+  {% endif %}
+  </div>
+</main>
+{% endblock %}

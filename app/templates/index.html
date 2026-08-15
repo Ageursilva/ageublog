@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="bMH6G0b4Hdi8KAB51KzLnaESKtxlhf8TGjl3RTmWdM4" />
+    <title>Ageu</title>
+    <meta name="description" content="Um local na internet para cultivar pensamentos e ideias" />
+    <link rel="canonical" href="{{ url_for('main.index', _external=True) }}" />
+    <link rel="alternate" type="application/rss+xml" title="Ageu" href="{{ url_for('main.feed', _external=True) }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ageu.blog/" />
+    <meta property="og:title" content="Ageu" />
+    <meta property="og:description" content="Um local na internet para cultivar pensamentos e ideias" />
+    <meta property="og:image" content="https://ageu.blog/static/logo.svg" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://ageu.blog/" />
+    <meta property="twitter:title" content="Ageu" />
+    <meta property="twitter:description" content="Um local na internet para cultivar pensamentos e ideias" />
+    <meta property="twitter:image" content="https://ageu.blog/static/logo.svg" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <meta name="yandex-verification" content="1f6afe4fe1c05b5c" />
+    <script src="https://darkvisitors.com/tracker.js?project_key=ed2d29e7-0623-4272-8bce-2cce5d64fd68"></script>
+
+</head>
+
+{% import '_icons.html' as icons %}
+<body>
+    <header>
+        <div class="container">
+            <h1 class="title">[AG]</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about">Sobre</a>
+                <a href="/radar">Radar Cultural</a>
+                <a href="{{ url_for('main.notas') }}">Notas</a>
+                <a href="/feed" aria-label="RSS">{{ icons.icon('rss') }}</a>
+                <a href="#" class="search-link" aria-label="Buscar">{{ icons.icon('search') }}</a>
+
+            </nav>
+            <div id="search-container"></div>
+    </header>
+    <hr>
+    <main>
+        <div class="posts">
+            {% for post in posts %}
+            <div class="card">
+                {% if post.image_url %}
+                <img src="{{ post.image_url }}" alt="Imagem do Post" class="post-image">
+                {% endif %}
+                <h3>{{ post.post.title }}</h3>
+                <p class="text-post">{{ post.excerpt }}...</p>
+                <a href="{{ url_for('main.post', post_id=post.post.id) }}">Continuar Lendo</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('main.index', page=pagination.prev_num) }}">« Anterior</a>
+            {% endif %}
+            {% if pagination.has_next %}
+            <a href="{{ url_for('main.index', page=pagination.next_num) }}">Próximo »</a>
+
+            {% endif %}
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+            | <a href="{{ url_for('main.privacidade') }}">Privacidade</a>
+            <p></p>
+            <div class="social-links">
+                <a class="social-icon" href="https://www.linkedin.com/in/ageursilva" target="_blank" rel="noopener" aria-label="LinkedIn">{{ icons.icon('linkedin') }}</a>
+                <a class="social-icon" href="https://github.com/Ageursilva" target="_blank" rel="noopener" aria-label="GitHub">{{ icons.icon('github') }}</a>
+            </div>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script data-goatcounter="https://ageu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+</body>
+
+</html>

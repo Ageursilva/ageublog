@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="bMH6G0b4Hdi8KAB51KzLnaESKtxlhf8TGjl3RTmWdM4" />
+  <title>
+    {% block title %}
+    Ageu
+    {% endblock %}
+  </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+  <script src="https://darkvisitors.com/tracker.js?project_key=ed2d29e7-0623-4272-8bce-2cce5d64fd68"></script>
+</head>
+
+{% import '_icons.html' as icons %}
+<body>
+  <header>
+    <div class="container">
+      <h1 class="title">[AG]</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about">Sobre</a>
+        <a href="/radar">Radar Cultural</a>
+        <a href="{{ url_for('main.notas') }}">Notas</a>
+        <a href="/feed" aria-label="RSS">{{ icons.icon('rss') }}</a>
+        <a href="#" class="search-link" aria-label="Buscar">{{ icons.icon('search') }}</a>
+      </nav>
+    </div>
+  </header>
+
+  {% block content %}
+
+  {% endblock %}
+
+  <footer>
+    <div class="container">
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+      | <a href="{{ url_for('main.privacidade') }}">Privacidade</a>
+      <p></p>
+      <div class="social-links">
+        <a class="social-icon" href="https://www.linkedin.com/in/ageursilva" target="_blank" rel="noopener" aria-label="LinkedIn">{{ icons.icon('linkedin') }}</a>
+        <a class="social-icon" href="https://github.com/Ageursilva" target="_blank" rel="noopener" aria-label="GitHub">{{ icons.icon('github') }}</a>
+      </div>
+    </div>
+  </footer>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script data-goatcounter="https://ageu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

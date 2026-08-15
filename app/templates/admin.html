@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Ageu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    {% if creating_new_post or post_to_edit %}
+    <link href="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.snow.css" rel="stylesheet">
+    {% endif %}
+</head>
+
+<body>
+    <div class="admin-container">
+
+        <div class="admin-header">
+            <h1 class="title title--inline">[AG]</h1>
+            <div class="admin-nav">
+                {% if not creating_new_post and not post_to_edit %}
+                <a href="{{ url_for('admin.create_post') }}" class="btn-primary">+ Novo Post</a>
+                <a href="{{ url_for('admin.comments') }}" class="btn-secondary">Comentários</a>
+                <a href="{{ url_for('admin.manage_tags') }}" class="btn-secondary">Tags</a>
+                <a href="{{ url_for('admin.admin_notas') }}" class="btn-secondary">Notas</a>
+
+
+                {% else %}
+                <a href="{{ url_for('admin.admin_panel') }}" class="btn-secondary">← Voltar</a>
+                {% endif %}
+                <form method="POST" action="{{ url_for('admin.logout') }}" class="logout-form">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token_value }}">
+                    <button type="submit" class="btn-danger">Sair</button>
+                </form>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <p class="flash-{{ category }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% if not creating_new_post and not post_to_edit %}
+
+        <div class="search-bar">
+            <form method="GET" action="{{ url_for('admin.admin_panel') }}">
+                <input type="text" name="q" placeholder="Buscar post..." value="{{ search or '' }}" autofocus>
+                <button type="submit">Buscar</button>
+                {% if search %}
+                <a href="{{ url_for('admin.admin_panel') }}" class="btn-secondary search-clear-link">✕</a>
+                {% endif %}
+            </form>
+        </div>
+
+        <div class="post-list">
+            {% if posts %}
+            {% for post in posts %}
+            <div class="post-item">
+                <h3>{{ post.title }}</h3>
+                <div class="post-actions">
+                    <a href="{{ url_for('admin.edit_post', post_id=post.id) }}" class="btn-secondary">Editar</a>
+                    <form method="POST" action="{{ url_for('admin.delete_post', post_id=post.id) }}"
+                        onsubmit="return confirm('Excluir {{ post.title }}?')">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token_value }}">
+                        <button type="submit" class="btn-danger">Excluir</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="no-results">
+                {% if search %}Nenhum post encontrado para "{{ search }}"{% else %}Nenhum post ainda{% endif %}
+            </p>
+            {% endif %}
+        </div>
+
+        <div class="pagination">
+            {% if prev_url %}<a href="{{ prev_url }}">← Anterior</a>{% endif %}
+            {% if next_url %}<a href="{{ next_url }}">Próximo →</a>{% endif %}
+        </div>
+
+        {% endif %}
+
+        {% if creating_new_post or post_to_edit %}
+        <div class="editor-header">
+            <h2>{% if creating_new_post %}Novo Post{% else %}Editar Post{% endif %}</h2>
+        </div>
+
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token_value }}">
+            <input type="hidden" name="content" id="content-input">
+
+            <input type="text" name="title" class="form-title-input" placeholder="Título do post"
+                value="{% if post_to_edit %}{{ post_to_edit.title }}{% endif %}" required>
+
+            <div class="quill-container">
+                <div id="editor">
+                    {% if post_to_edit %}{{ post_to_edit.content|safe }}{% endif %}
+                </div>
+            </div>
+            <div class="form-group form-group--tags">
+                <label class="tags-select-label">Tags</label>
+                <select name="tags" multiple class="tags-select">
+                    {% for tag in all_tags %}
+                    <option value="{{ tag.id }}" {% if post_to_edit and tag in post_to_edit.tags %}selected{% endif %}>
+                        {{ tag.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <a href="{{ url_for('admin.manage_tags') }}" class="tags-manage-link">+ gerenciar tags</a>
+            </div>
+            <div class="editor-actions">
+                <a href="{{ url_for('admin.admin_panel') }}" class="btn-secondary">Cancelar</a>
+                <button type="submit" class="btn-primary" onclick="submitForm()">
+                    {% if creating_new_post %}Publicar{% else %}Salvar{% endif %}
+                </button>
+            </div>
+        </form>
+
+        <script src="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.min.js"></script>
+        <script>
+            var quill = new Quill('#editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'font': [] }, { 'size': [] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'script': 'sub' }, { 'script': 'super' }],
+                        [{ 'header': 1 }, { 'header': 2 }, 'blockquote', 'code-block'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+                        [{ 'align': [] }],
+                        ['link', 'image'],
+                        ['clean']
+                    ]
+                }
+            });
+
+            function submitForm() {
+                document.getElementById('content-input').value = quill.root.innerHTML;
+            }
+        </script>
+        {% endif %}
+
+    </div>
+</body>
+
+</html>

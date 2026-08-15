@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas | Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1 class="title title--inline">[AG]</h1>
+            <div class="admin-note-links">
+                <a href="{{ url_for('admin.admin_panel') }}" class="admin-note-link">←
+                    Admin</a>
+                <a href="{{ url_for('main.notas') }}" class="admin-note-link" target="_blank">Ver notas</a>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <p class="flash-{{ category }}">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="note-form note-form-panel">
+            <h2 class="note-form-header">{% if edit_note %}Editar nota{% else %}Nova nota{% endif %}</h2>
+            <form method="POST"
+                action="{% if edit_note %}{{ url_for('admin.edit_nota', note_id=edit_note.id) }}{% else %}{{ url_for('admin.admin_notas') }}{% endif %}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token_value }}">
+                <textarea name="content"
+                    placeholder="Escreva sua nota... (Markdown suportado)">{% if edit_note %}{{ edit_note.content }}{% endif %}</textarea>
+                <p class="markdown-hint">**negrito** *itálico* [link](url) `código`</p>
+                <button type="submit">{% if edit_note %}Salvar{% else %}Publicar{% endif %}</button>
+                {% if edit_note %}
+                <a href="{{ url_for('admin.admin_notas') }}" class="note-cancel-link">Cancelar</a>
+                {% endif %}
+            </form>
+        </div>
+
+        <div class="notes-list">
+            {% for note in notes %}
+            <div class="note-item">
+                <div class="note-meta">
+                    <span class="note-date">{{ note.created_at.strftime('%d/%m/%Y %H:%M') }}</span>
+                    <div class="note-actions">
+                        <a href="{{ url_for('admin.edit_nota', note_id=note.id) }}">Editar</a>
+                        <form method="POST" action="{{ url_for('admin.delete_nota', note_id=note.id) }}"
+                            onsubmit="return confirm('Excluir nota?')" style="display:inline;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token_value }}">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="note-preview">{{ note.content[:200] }}{% if note.content|length > 200 %}...{% endif %}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if pagination %}
+        <div class="pagination">
+            {% if pagination.has_prev %}
+            <a href="{{ url_for('admin.admin_notas', page=pagination.prev_num) }}">« Anterior</a>
+            {% endif %}
+            {% if pagination.has_next %}
+            <a href="{{ url_for('admin.admin_notas', page=pagination.next_num) }}">Próximo »</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

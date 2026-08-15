@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Tags | Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1 class="title title--inline">[AG]</h1>
+            <a href="{{ url_for('admin.admin_panel') }}" class="admin-nav-back">← Voltar</a>
+
+        </div>
+
+        <h2>Gerenciar Tags</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <p class="flash-{{ category }}">{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" class="tag-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token_value }}">
+            <input type="text" name="name" placeholder="Nome da nova tag" required maxlength="100">
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <div class="tag-list">
+            {% for tag in tags %}
+            <div class="tag-item">
+                <span>{{ tag.name }}</span>
+                <form method="POST" action="{{ url_for('admin.delete_tag', tag_id=tag.id) }}"
+                    onsubmit="return confirm('Excluir tag {{ tag.name }}?')">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token_value }}">
+                    <button type="submit">Excluir</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

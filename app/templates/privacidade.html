@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>Política de Privacidade | Ageu</title>
+    <meta name="description" content="Política de privacidade do Ageu.blog">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+
+{% import '_icons.html' as icons %}
+<body>
+    <header>
+        <div class="container">
+            <h1 class="title">[AG]</h1>
+            <nav>
+                <a href="{{ url_for('main.index') }}">Home</a>
+                <a href="{{ url_for('main.about') }}">Sobre</a>
+                <a href="{{ url_for('main.radar') }}">Radar Cultural</a>
+                <a href="{{ url_for('main.notas') }}">Notas</a>
+                <a href="/feed" aria-label="RSS">{{ icons.icon('rss') }}</a>
+                <a href="#" class="search-link" aria-label="Buscar">{{ icons.icon('search') }}</a>
+            </nav>
+        </div>
+    </header>
+    <hr class="divider" />
+    <main>
+        <div class="container">
+            <div class="about">
+                <h1>Política de Privacidade</h1>
+
+                <h2 style="font-size:1.3rem; margin-bottom:0.8rem;">Comentários</h2>
+                <p>Ao deixar um comentário no blog, são armazenados o nome informado e, opcionalmente, o endereço do seu
+                    site. Essas informações são exibidas junto ao comentário publicado.</p>
+
+                <h2 style="font-size:1.3rem; margin-bottom:0.8rem;">Estatísticas de acesso</h2>
+                <p>O Ageu.blog utiliza o <a href="https://www.goatcounter.com" target="_blank">GoatCounter</a> para
+                    obter estatísticas de visitação. Essa ferramenta não utiliza cookies, não rastreia visitantes
+                    individualmente e não coleta dados pessoais identificáveis. É usada exclusivamente para entender o
+                    volume de acessos ao site.</p>
+
+                <h2 style="font-size:1.3rem; margin-bottom:0.8rem;">Cookies</h2>
+                <p>Este site não utiliza cookies para rastreamento, publicidade ou marketing. Nenhum cookie é armazenado
+                    no seu navegador ao visitar o Ageu.blog.</p>
+
+                <h2 style="font-size:1.3rem; margin-bottom:0.8rem;">Compartilhamento de dados</h2>
+                <p>Os dados coletados não são vendidos, compartilhados ou utilizados para fins comerciais. Somente
+                    poderão ser fornecidos mediante obrigação legal.</p>
+
+                <h2 style="font-size:1.3rem; margin-bottom:0.8rem;">Seus direitos</h2>
+                <p>Você tem o direito de solicitar:</p>
+                <p>A remoção de um comentário que você publicou neste blog.</p>
+                <p>A remoção de qualquer conteúdo que mencione ou identifique você sem sua autorização.</p>
+                <p>Esclarecimentos sobre como seus dados são tratados.</p>
+                <p>Para qualquer solicitação, entre em contato pelo e-mail: <a
+                        href="mailto:ageu@duck.com">ageu@duck.com</a>. As solicitações serão analisadas e respondidas em
+                    até 15 dias úteis.</p>
+            </div>
+    </main>
+    <footer>
+        <div class="container">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt-br" target="_blank">CC BY-NC-SA 4.0</a>
+            <a href="{{ url_for('main.privacidade') }}">Privacidade</a>
+            <p></p>
+            <div class="social-links">
+                <a class="social-icon" href="https://www.linkedin.com/in/ageursilva" target="_blank" rel="noopener" aria-label="LinkedIn">{{ icons.icon('linkedin') }}</a>
+                <a class="social-icon" href="https://github.com/Ageursilva" target="_blank" rel="noopener" aria-label="GitHub">{{ icons.icon('github') }}</a>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </footer>
+    <script data-goatcounter="https://ageu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

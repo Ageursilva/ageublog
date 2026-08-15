@@ -1,0 +1,2 @@
+# Scripts shell sempre em LF, mesmo em checkouts no Windows
+*.sh text eol=lf
