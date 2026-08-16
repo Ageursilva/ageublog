@@ -5,7 +5,7 @@
 
   #  Ageu Blog Template
 Este é o modelo que desenvolvi para o meu ["Jardim Digital"](https://weeklymusings.net/weekly-musings-092) usado em meu [blog](https://ageu.blog/) pessoal. A ideia aqui é que você possa utilizar e aprimorar para o seu uso. Tentei criar algo clean, simples e visualmente agradável para que qualquer pessoa possa usar.
-Fique à vontade para usá-lo, bifurcar (fork) e aprimorar. O código passou por uma grande revisão de segurança e funcionalidades recentemente, além de ter sido **refatorado para uma arquitetura modular profissional**.
+Fique à vontade para usá-lo, bifurcar (fork) e aprimorar. O código é construído com foco em segurança e performance e segue uma **arquitetura modular profissional**.
  
 > "Be curious. Read widely. Try new things. I think a lot of what people call intelligence boils down to curiosity." — **Aaron Swartz**  
 ##  Visão Geral
