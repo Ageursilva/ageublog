@@ -7,9 +7,10 @@ Agradecemos por ajudar a manter este projeto seguro para todos os seus usuários
 Se você encontrar uma vulnerabilidade de segurança, por favor, siga estas etapas:
 
 1. **Não divulgue publicamente**: Não crie uma issue pública para relatar vulnerabilidades de segurança. Em vez disso, use o e-mail abaixo para relatar problemas de forma privada.
-2. **Envie um e-mail detalhado**:
-   - Envie um e-mail para **Ageu13silva@gmail.com** com o assunto: **[Relatório de Vulnerabilidade de Segurança]**.
-   - Inclua os seguintes detalhes:
+2. **Reporte via Private Vulnerability Reporting do GitHub**:
+   Use o botão "Report a vulnerability" na aba **Security** do repositório:
+   https://github.com/Ageursilva/ageublog/security/advisories/new
+   Inclua os seguintes detalhes:
      - Descrição clara da vulnerabilidade.
      - Passos para reproduzir o problema.
      - Impacto potencial.

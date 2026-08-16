@@ -10,9 +10,10 @@ If you find a security vulnerability, please follow these steps:
 
 1. **Do not disclose publicly**: Do not open a public issue to report
    security vulnerabilities. Use the email below to report problems privately.
-2. **Send a detailed email**:
-   - Email **Ageu13silva@gmail.com** with the subject: **[Security Vulnerability Report]**.
-   - Include the following details:
+2. **Report via GitHub Private Vulnerability Reporting**:
+   Use the "Report a vulnerability" button in the repo's **Security** tab:
+   https://github.com/Ageursilva/ageublog/security/advisories/new
+   Include the following details:
      - Clear description of the vulnerability.
      - Steps to reproduce the issue.
      - Potential impact.

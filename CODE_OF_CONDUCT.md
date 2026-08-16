@@ -59,8 +59,8 @@ representative at an online or offline event.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement at
-**Ageu13silva@gmail.com**.
+reported to the community leaders responsible for enforcement via the
+project's GitHub Issues: https://github.com/Ageursilva/ageublog/issues
 
 All complaints will be reviewed and investigated promptly and fairly.
 
