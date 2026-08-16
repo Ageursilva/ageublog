@@ -43,7 +43,7 @@ class Config:
         h.strip()
         for h in os.environ.get(
             "TRUSTED_HOSTS",
-            "ageu.blog,www.ageu.blog,localhost,127.0.0.1",
+            "localhost,127.0.0.1",
         ).split(",")
         if h.strip()
     ]
