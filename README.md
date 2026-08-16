@@ -11,22 +11,38 @@ Feel free to use it, fork it, and improve it. The code has recently undergone a 
 ##  Overview
 The blog offers a clean and responsive layout, optimized for a pleasant reading experience. The structure is designed to be simple to install and maintain, ideal for those looking for a personal and secure writing space. Now with **modular architecture using Flask Blueprints**, making maintenance and scalability easier.
 ##  Features
-- Simple, responsive, and dark-themed design.
-- Post editor with [QuillJS](https://quilljs.com/).
 
-- **Enhanced Security:**
--  CSRF protection on all forms.
--  HTML sanitization (XSS) on post content.
--  **Automatic Feed Generation:**
--  Dynamically generated RSS feed (`/feed`).
--  Dynamically generated Sitemap (`/sitemap.xml`) for better SEO.
--  **Modular Architecture:**
--  Clear separation of concerns with Blueprints.
--  Easy maintenance and scalability.
--  Post pagination on homepage and admin panel.
--  Protected admin area with authentication.
+**Content**
+- Posts with a rich text editor ([QuillJS](https://quilljs.com/)).
+- Tags to organize posts (`/tag/<name>`).
+- Notes — short Markdown posts (`/notas`).
+- Radar Cultural — a pinned post for cultural recommendations.
+- Full-text search (`/search?query=...`).
+- Pagination on the homepage, tags and admin panel.
 
-  
+**Comments**
+- Native comment system (no third-party service): replies, author badge,
+  and a moderation queue in the admin panel.
+
+**Security**
+- CSRF protection on all forms (Flask-WTF).
+- HTML sanitization (Bleach) on post content and comment fields.
+- Server-side validation of the comment `website` field (blocks `javascript:`/`data:`).
+- Rate limiting on login and comments (per real IP, behind proxies).
+- Secure sessions (HttpOnly, SameSite, Secure in production) and POST-only logout.
+- Runs as a non-root service in production.
+
+**Performance & SEO**
+- Dynamically generated RSS feed (`/feed`).
+- Dynamically generated sitemap (`/sitemap.xml`).
+- JSON-LD structured data (`BlogPosting`) on posts.
+- Inline SVG icons — no icon CDN.
+- Static files served directly by Nginx with cache (production).
+
+**Architecture**
+- Modular Flask app with the application factory pattern and Blueprints.
+- SQLite by default; PostgreSQL/Supabase optional.
+- Minimal, clean, dark-themed design — no heavy CSS frameworks.
 
 ##  Technologies Used
 -  **Backend**: Python, Flask, Jinja2
@@ -171,12 +187,16 @@ def  create_app():
 -  `extract_image_and_excerpt()`: Extracts image and excerpt from posts
 
 ##  Commenting System
-This template has been tested with several commenting solutions. Choose the one that best suits you:
--  **Giscus:** Uses GitHub Discussions. Lightweight, modern, and supports reactions/replies.
--  **Cusdis:** An excellent privacy-focused option that allows anonymous comments.
--  **Utterances:** Uses GitHub Issues. A solid and simple alternative.
 
-To implement, simply replace the comment script at the end of the `templates/post.html` file.
+Native comment system (no third-party service):
+
+- Visitors can comment on posts, with optional name and website.
+- Replies to comments (one level).
+- Comments from the admin are marked with an author badge.
+- Moderation queue in the admin panel (`/admin/comments`): mark as seen or delete.
+- Server-side validation: the `website` field only accepts `http`/`https`
+  (blocks `javascript:`/`data:`), and content length is limited.
+
 ##  Contributions
 
 Contributions are very welcome! Feel free to:
