@@ -1,40 +1,46 @@
+# Security Policy
 
-# Política de Segurança
+Thank you for helping keep this project safe for everyone. This policy
+describes how to report security vulnerabilities and what you can expect
+when you do.
 
-Agradecemos por ajudar a manter este projeto seguro para todos os seus usuários. Esta política descreve como relatar vulnerabilidades de segurança e o que você pode esperar ao fazer isso.
+## Reporting Security Issues
 
-## Relatando Problemas de Segurança
+If you find a security vulnerability, please follow these steps:
 
-Se você encontrar uma vulnerabilidade de segurança, por favor, siga estas etapas:
+1. **Do not disclose publicly**: Do not open a public issue to report
+   security vulnerabilities. Use the email below to report problems privately.
+2. **Send a detailed email**:
+   - Email **Ageu13silva@gmail.com** with the subject: **[Security Vulnerability Report]**.
+   - Include the following details:
+     - Clear description of the vulnerability.
+     - Steps to reproduce the issue.
+     - Potential impact.
+     - Suggested fixes (optional).
 
-1. **Não divulgue publicamente**: Não crie uma issue pública para relatar vulnerabilidades de segurança. Em vez disso, use o e-mail abaixo para relatar problemas de forma privada.
-2. **Envie um e-mail detalhado**:
-   - Envie um e-mail para **Ageu13silva@gmail.com** com o assunto: **[Relatório de Vulnerabilidade de Segurança]**.
-   - Inclua os seguintes detalhes:
-     - Descrição clara da vulnerabilidade.
-     - Passos para reproduzir o problema.
-     - Impacto potencial.
-     - Sugestões para resolver o problema (opcional).
+## Response Time
 
-## Tempo de Resposta
+We are committed to treating security reports with priority. Here is the
+expected timeline:
 
-Nos comprometemos a tratar relatórios de segurança com prioridade. Aqui está o cronograma esperado:
+1. **Acknowledgment**: Within 48 hours.
+2. **Initial analysis**: Within 7 business days.
+3. **Fix planning**: Depending on severity, it may take up to 30 days to
+   implement and publish a fix.
 
-1. **Confirmação de recebimento**: Dentro de 48 horas.
-2. **Análise inicial**: Dentro de 7 dias úteis.
-3. **Planejamento de correção**: Dependendo da gravidade, pode levar até 30 dias para implementar e publicar uma correção.
+We will keep you updated on the fix status when necessary.
 
-Se necessário, atualizaremos você sobre o status da correção.
+## Vulnerability Disclosure
 
-## Divulgação de Vulnerabilidades
+After fixing a vulnerability, we will follow these steps:
 
-Após corrigir uma vulnerabilidade, seguiremos estas etapas:
+1. Publish a new version containing the fix.
+2. Update the community about the vulnerability and the fix, while avoiding
+   disclosing details that could exploit the flaw before everyone has updated.
 
-1. Publicar uma nova versão contendo a correção.
-2. Atualizar a comunidade sobre a vulnerabilidade e a correção, enquanto evitamos divulgar detalhes que possam explorar a falha antes de todos terem atualizado.
+## Acknowledgments
 
-## Agradecimentos
+If you report a vulnerability that is confirmed and fixed, we will be happy
+to include your name (with your permission) in the project's acknowledgments.
 
-Se você relatar uma vulnerabilidade que for confirmada e corrigida, ficaremos felizes em incluir seu nome (com sua permissão) na seção de agradecimentos do projeto.
-
-Agradecemos pela sua ajuda em manter o projeto seguro!
+Thank you for helping keep the project safe!

@@ -127,12 +127,12 @@ with app.app_context():
     db.create_all()
     if not User.query.filter_by(username='admin').first():
         admin = User(username='admin')
-        admin.set_password('sua_senha_forte')
+        admin.set_password('your_strong_password')
         db.session.add(admin)
         db.session.commit()
-        print('Admin criado: admin')
+        print('Admin created: admin')
     else:
-        print('Admin ja existe')
+        print('Admin already exists')
 "
 ```
 
@@ -149,42 +149,71 @@ gunicorn --workers 2 --bind 0.0.0.0:8000 run:app
 Access `http://127.0.0.1:5000` (or `http://127.0.0.1:8000` with Gunicorn).
 Admin area: `/admin/login`.
 
+##  Running the Tests
+
+The project includes an automated test suite (pytest):
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+It covers security (XSS sanitization, CSRF, rate limits), public routes,
+and the admin CRUD flows.
+
 ##  Modular Architecture
+
 The project uses **Flask Blueprints** to organize routes into independent modules:
 
 ###  `app/__init__.py` - Factory Pattern
 
 ```python
-def  create_app():
-# Creates and configures the Flask app
-# Registers all blueprints
-# Initializes extensions (db, csrf)
+def create_app(test_config=None):
+    app = Flask(__name__)
+    app.config.from_object("app.config.Config")
+    db.init_app(app)
+    csrf.init_app(app)
+    limiter.init_app(app)
+    app.register_blueprint(main)
+    app.register_blueprint(admin, url_prefix="/admin")
+    return app
 ```
+
 ###  `app/models.py` - Data Models
 
--  `User`: User model with authentication
--  `Post`: Blog post model
-- 
+- `User`: Admin user with password authentication.
+- `Post`: Blog post (title, content, tags).
+- `Comment`: Post comments (with replies and author badge).
+- `Tag`: Post tags.
+- `Note`: Short Markdown posts.
+
 ###  `app/views.py` - Public Routes
 
--  `/`: Home with pagination
--  `/post/<id>`: Post page
--  `/about`: About page
--  `/search`: Post search
--  `/feed`: RSS feed
--  `/sitemap.xml`: Sitemap for SEO
-- 
+- `/`: Home with pagination.
+- `/post/<id>`: Post page with comments.
+- `/tag/<name>`: Posts by tag.
+- `/notas` / `/notas/<id>`: Notes.
+- `/radar`: Radar Cultural.
+- `/search`: Post search.
+- `/feed`: RSS feed.
+- `/sitemap.xml`: Sitemap for SEO.
+- `/about`, `/privacidade`: Static pages.
+
 ###  `app/admin.py` - Admin Routes
--  `/admin/login`: Authentication
--  `/admin/`: Control panel
--  `/admin/create_post`: Create new post
--  `/admin/edit_post/<id>`: Edit post
--  `/admin/delete_post/<id>`: Delete post
+
+- `/admin/login`: Authentication (rate limited).
+- `/admin/`: Control panel.
+- `/admin/create_post` / `/admin/edit_post/<id>` / `/admin/delete_post/<id>`: Post management.
+- `/admin/tags`: Tag management.
+- `/admin/comments`: Comment moderation.
+- `/admin/notas`: Notes management.
 
 ###  `app/utils.py` - Helper Functions
--  `login_required()`: Decorator to protect routes
--  `clean_content()`: HTML sanitization
--  `extract_image_and_excerpt()`: Extracts image and excerpt from posts
+
+- `login_required()`: Decorator to protect routes.
+- `clean_content()`: HTML sanitization (Bleach).
+- `extract_image_and_excerpt()`: Extracts image and excerpt from posts.
+- `sanitize_website()`: Validates comment website URLs.
 
 ##  Commenting System
 

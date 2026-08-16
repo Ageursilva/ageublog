@@ -150,48 +150,72 @@ gunicorn --workers 2 --bind 0.0.0.0:8000 run:app
 Acesse `http://127.0.0.1:5000` (ou `http://127.0.0.1:8000` se usar Gunicorn).
 Área de admin: `/admin/login`.
 
+##  Rodando os Testes
+
+O projeto inclui uma suíte de testes automatizados (pytest):
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+Ela cobre segurança (sanitização de XSS, CSRF, rate limits), rotas públicas
+e os fluxos de CRUD do admin.
+
 ##  Arquitetura Modular
+
 O projeto utiliza **Blueprints do Flask** para organizar as rotas em módulos independentes:
- 
+
 ###  `app/__init__.py` - Factory Pattern
 
 ```python
-
-def  create_app():
-
-# Cria e configura a aplicação Flask
-# Registra todos os blueprints
-# Inicializa extensões (db, csrf)
+def create_app(test_config=None):
+    app = Flask(__name__)
+    app.config.from_object("app.config.Config")
+    db.init_app(app)
+    csrf.init_app(app)
+    limiter.init_app(app)
+    app.register_blueprint(main)
+    app.register_blueprint(admin, url_prefix="/admin")
+    return app
 ```
-
 
 ###  `app/models.py` - Modelos de Dados
 
--  `User`: Modelo de usuário com autenticação
-
--  `Post`: Modelo de posts do blog 
+- `User`: Usuário admin com autenticação por senha.
+- `Post`: Post do blog (título, conteúdo, tags).
+- `Comment`: Comentários dos posts (com respostas e selo de autor).
+- `Tag`: Tags dos posts.
+- `Note`: Notas curtas em Markdown.
 
 ###  `app/views.py` - Rotas Públicas
 
--  `/`: Home com paginação
--  `/post/<id>`: Página de post
--  `/about`: Página sobre
--  `/search`: Busca de posts
--  `/feed`: RSS feed
--  `/sitemap.xml`: Sitemap para SEO
+- `/`: Home com paginação.
+- `/post/<id>`: Página do post com comentários.
+- `/tag/<nome>`: Posts por tag.
+- `/notas` / `/notas/<id>`: Notas.
+- `/radar`: Radar Cultural.
+- `/search`: Busca de posts.
+- `/feed`: RSS feed.
+- `/sitemap.xml`: Sitemap para SEO.
+- `/about`, `/privacidade`: Páginas estáticas.
 
 ###  `app/admin.py` - Rotas Administrativas
 
--  `/admin/login`: Autenticação
--  `/admin/`: Painel de controle
--  `/admin/create_post`: Criar novo post
--  `/admin/edit_post/<id>`: Editar post
--  `/admin/delete_post/<id>`: Deletar post
+- `/admin/login`: Autenticação (com rate limit).
+- `/admin/`: Painel de controle.
+- `/admin/create_post` / `/admin/edit_post/<id>` / `/admin/delete_post/<id>`: Gestão de posts.
+- `/admin/tags`: Gestão de tags.
+- `/admin/comments`: Moderação de comentários.
+- `/admin/notas`: Gestão de notas.
+
 ###  `app/utils.py` - Funções Auxiliares
 
--  `login_required()`: Decorator para proteger rotas
--  `clean_content()`: Sanitização de HTML
--  `extract_image_and_excerpt()`: Extrai imagem e resumo de posts
+- `login_required()`: Decorator para proteger rotas.
+- `clean_content()`: Sanitização de HTML (Bleach).
+- `extract_image_and_excerpt()`: Extrai imagem e resumo dos posts.
+- `sanitize_website()`: Valida URLs do campo website dos comentários.
+
 ##  Sistema de Comentários
 
 Sistema de comentários nativo (sem serviço de terceiros):

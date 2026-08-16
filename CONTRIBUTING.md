@@ -1,109 +1,121 @@
+# Contributing
 
-# Guia de Contribuição
+Thank you for your interest in contributing to this project! This guide will
+help you set up the development environment and ensure your contributions
+match the project's standards.
 
-Obrigado pelo seu interesse em contribuir para o nosso projeto! Este guia ajudará você a configurar o ambiente de desenvolvimento e garantir que as suas contribuições estejam de acordo com os padrões do projeto.
+## Requirements
 
-## Requisitos
+- Python 3.8+
+- Flask
+- SQLite (default, for development) or PostgreSQL/Supabase
+- Other dependencies listed in `requirements.txt`
 
-- **Python 3.8+**
-- **Flask**
-- **Flask-Migrate** (para gerenciar as migrações do banco de dados)
-- **Banco de Dados**: SQLite (para desenvolvimento) ou outro banco de sua escolha
-- **Outras Dependências**: listadas no `requirements.txt`
+## Environment Setup
 
-## Configuração do Ambiente
-
-1. **Clone o repositório**:
+1. **Clone the repository**:
     ```bash
     git clone https://github.com/Ageursilva/ageublog.git
-    cd seu-repositorio
+    cd ageublog
     ```
 
-2. **Crie e ative o ambiente virtual**:
+2. **Create and activate a virtual environment**:
     ```bash
     python -m venv venv
-    source venv/bin/activate  # Para Linux/Mac
-    venv\Scripts\activate     # Para Windows
+    source venv/bin/activate   # Linux/macOS
+    venv\Scripts\activate      # Windows
     ```
 
-3. **Instale as dependências**:
+3. **Install dependencies**:
     ```bash
     pip install -r requirements.txt
+    pip install -r requirements-dev.txt   # for the test suite
     ```
 
-4. **Configurar as variáveis de ambiente**:
-   Crie um arquivo `.env` na raiz do projeto para armazenar as variáveis de ambiente necessárias, como `SECRET_KEY` e configurações do banco de dados. Exemplo:
-   
-    ```
-    FLASK_APP=app.py
-    FLASK_ENV=development
-    SECRET_KEY=your_secret_key
-    ```
-
-5. **Configure o Banco de Dados**:
-   Inicie o banco de dados e execute as migrações:
-   
+4. **Configure the environment**:
+   Copy `.env.example` to `.env` and set at least `SECRET_KEY` (the app
+   refuses to start without it):
     ```bash
-    flask db upgrade
+    cp .env.example .env
     ```
 
-6. **Inicie o servidor**:
+5. **Create the database and the admin user** (first time only):
     ```bash
-    flask run
+    python -c "
+    from app import create_app, db
+    from app.models import User
+    app = create_app()
+    with app.app_context():
+        db.create_all()
+        admin = User(username='admin')
+        admin.set_password('your_strong_password')
+        db.session.add(admin)
+        db.session.commit()
+        print('Admin created: admin')
+    "
     ```
 
-O projeto estará disponível em `http://localhost:5000`.
-
-## Estrutura do Projeto
-
-Aqui está uma visão geral da estrutura do projeto:
-
-- `app.py`: Arquivo principal da aplicação Flask.
-- `models.py`: Modelos de banco de dados.
-- `templates/`: Diretório contendo os templates HTML.
-- `static/`: Diretório para arquivos estáticos como CSS e JavaScript.
-- `requirements.txt`: Arquivo contendo as dependências do projeto.
-
-## Contribuindo com Código
-
-1. **Fork o repositório** e crie uma nova branch para sua contribuição:
+6. **Run the application**:
     ```bash
-    git checkout -b nome-da-feature
+    python run.py
     ```
+    The project will be available at `http://localhost:5000`.
 
-2. **Escreva código limpo e documentado**:
-   - Siga o padrão PEP8 para Python.
-   - Comente trechos de código que possam não ser claros para outros desenvolvedores.
-   - Siga o padrão de formatação do HTML e CSS do projeto para manter a consistência.
+## Project Structure
 
-3. **Adicione testes** (se aplicável):
-   - Crie testes unitários para novas funcionalidades ou correções de bugs.
-   - Certifique-se de que todos os testes estão passando antes de enviar sua contribuição.
+- `app/`: Flask application package (factory, models, views, admin, utils).
+- `app/templates/`: Jinja2 templates.
+- `app/static/`: Static files (CSS, JS, icons).
+- `run.py`: Application entry point.
+- `tests/`: Automated tests (pytest).
+- `requirements.txt` / `requirements-dev.txt`: Dependencies.
 
-4. **Atualize a documentação**:
-   - Se sua alteração adiciona uma nova funcionalidade ou altera uma funcionalidade existente, atualize os arquivos de documentação apropriados.
+## Running the Tests
 
-5. **Commit e push** suas alterações:
-    ```bash
-    git commit -m "Descrição clara do commit"
-    git push origin nome-da-feature
-    ```
-
-6. **Abra um Pull Request**:
-   - Explique o que foi adicionado ou alterado e por que.
-   - Aguarde pelo feedback e faça ajustes, se necessário.
-
-## Padrões de Commit
-
-Para garantir a consistência nos commits, siga o padrão abaixo:
-
-- `feat`: Adição de uma nova funcionalidade.
-- `fix`: Correção de um bug.
-- `docs`: Alterações na documentação.
-- `style`: Alterações de formatação (espaços, ponto-e-vírgula, etc).
-- `refactor`: Refatoração de código sem alteração de funcionalidade.
-- `test`: Adição ou modificação de testes.
-
-Exemplo:
 ```bash
-git commit -m "feat: adiciona funcionalidade de notas no painel de admin"
+pip install -r requirements-dev.txt
+pytest
+```
+
+## Contributing Code
+
+1. **Fork the repository** and create a new branch:
+    ```bash
+    git checkout -b your-feature-branch
+    ```
+
+2. **Write clean, documented code**:
+   - Follow PEP 8 for Python.
+   - Comment code sections that may not be clear to other developers.
+   - Keep the project's HTML/CSS formatting style for consistency.
+
+3. **Add tests** (when applicable):
+   - Write unit tests for new features or bug fixes.
+   - Make sure all tests pass before submitting.
+
+4. **Update the documentation**:
+   - If your change adds or modifies a feature, update the relevant docs.
+
+5. **Commit and push**:
+    ```bash
+    git commit -m "Clear commit description"
+    git push origin your-feature-branch
+    ```
+
+6. **Open a Pull Request**:
+   - Explain what was added or changed and why.
+   - Wait for feedback and adjust if needed.
+
+## Commit Conventions
+
+- `feat`: New feature.
+- `fix`: Bug fix.
+- `docs`: Documentation changes.
+- `style`: Formatting changes (spaces, semicolons, etc).
+- `refactor`: Code refactoring without behavior change.
+- `test`: Adding or modifying tests.
+
+Example:
+```bash
+git commit -m "feat: add notes feature to the admin panel"
+```
