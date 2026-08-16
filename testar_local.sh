@@ -28,7 +28,7 @@ ADMIN_PASS="admin123"   # somente para o ambiente de teste local
 export SECRET_KEY="dev-local-key"
 export DATABASE_URL="sqlite:///${DB_FILE}"
 export SESSION_COOKIE_SECURE="false"
-export TRUSTED_HOSTS="ageu.blog,www.ageu.blog,localhost,127.0.0.1"
+export TRUSTED_HOSTS="localhost,127.0.0.1"
 export PORT="${PORT}"
 
 # --- helpers ---------------------------------------------------------------

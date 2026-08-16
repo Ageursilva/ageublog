@@ -72,7 +72,6 @@ ageublog/
 ├── requirements.txt     # Dependências
 ├── requirements-dev.txt # Dependências de dev/teste (pytest)
 ├── .env.example         # Template de variáveis de ambiente
-├── docs/                # Docs de arquitetura e deploy
 ├── LICENSE
 └── README.md / README.pt.md
 ```
