@@ -10,7 +10,7 @@ admin = Blueprint('admin', __name__)
 
 
 @admin.route('/login', methods=['GET', 'POST'])
-@limiter.limit("10 per minute", methods=["POST"])
+@limiter.limit("10 per minute; 100 per hour", methods=["POST"])
 def login():
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
@@ -18,7 +18,13 @@ def login():
 
         user = User.query.filter_by(username=username).first()
 
-        if user and user.check_password(password):
+        if user is None:
+            # Equaliza o tempo de resposta (evita enumeração de usuário por timing).
+            dummy = User(username=username)
+            dummy.set_password('dummy-password-for-timing')
+            user = dummy
+
+        if user.check_password(password):
             session.clear()
             session.permanent = True
             session['user_id'] = user.id
@@ -75,6 +81,12 @@ def create_post():
             flash('Título e conteúdo são obrigatórios', 'error')
             return redirect(url_for('admin.create_post'))
 
+        if len(title) > 255:
+            # A coluna é varchar(255) — no Postgres um título maior levanta
+            # DataError e derruba a requisição com 500.
+            flash('Título muito longo (máximo 255 caracteres)', 'error')
+            return redirect(url_for('admin.create_post'))
+
         new_post = Post(title=title, content=content)
 
         if tag_ids:
@@ -116,6 +128,10 @@ def edit_post(post_id):
             flash('Título e conteúdo são obrigatórios', 'error')
             return redirect(url_for('admin.edit_post', post_id=post_id))
 
+        if len(post.title) > 255:
+            flash('Título muito longo (máximo 255 caracteres)', 'error')
+            return redirect(url_for('admin.edit_post', post_id=post_id))
+
         post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all() if tag_ids else []
 
         try:
@@ -142,7 +158,10 @@ def edit_post(post_id):
 def manage_tags():
     if request.method == 'POST':
         name = bleach.clean(request.form.get('name', '').strip())
-        if name:
+        if len(name) > 100:
+            # A coluna é varchar(100) — no Postgres um nome maior dá 500.
+            flash('Nome de tag muito longo (máximo 100 caracteres)', 'error')
+        elif name:
             existing = Tag.query.filter_by(name=name).first()
             if not existing:
                 db.session.add(Tag(name=name))

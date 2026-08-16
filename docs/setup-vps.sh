@@ -249,7 +249,11 @@ server {
         proxy_pass http://unix:/run/ageu/ageu.sock;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # SOBRESCREVE o X-Forwarded-For com o IP real da conexão. NÃO usar
+        # $proxy_add_x_forwarded_for: ele faz append e o ProxyFix do app lê o
+        # PRIMEIRO valor (controlável pelo cliente) — permitindo spoofing de
+        # IP e bypass do rate limit.
+        proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header X-Forwarded-Proto https;
         add_header Content-Type application/rss+xml;
     }
@@ -259,7 +263,11 @@ server {
         proxy_pass http://unix:/run/ageu/ageu.sock;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # SOBRESCREVE o X-Forwarded-For com o IP real da conexão. NÃO usar
+        # $proxy_add_x_forwarded_for: ele faz append e o ProxyFix do app lê o
+        # PRIMEIRO valor (controlável pelo cliente) — permitindo spoofing de
+        # IP e bypass do rate limit.
+        proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header X-Forwarded-Proto https;
         proxy_http_version 1.1;
         proxy_set_header Connection "";

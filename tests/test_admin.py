@@ -148,3 +148,33 @@ def test_manage_comments(client, app, login, seeded_blog):
 
     with app.app_context():
         assert db.session.get(Comment, seeded_blog["reply_id"]) is None
+
+
+def test_create_post_rejects_long_title(client, app, login):
+    """Título >255 chars seria DataError no Postgres (500) — deve ser rejeitado."""
+    login()
+    long_title = "T" * 300
+    response = client.post(
+        "/admin/create_post",
+        data={"title": long_title, "content": "<p>x</p>", "tags": ""},
+        follow_redirects=False,
+    )
+    assert response.status_code == 302
+    with app.app_context():
+        from app.models import Post
+        assert Post.query.filter_by(title=long_title).first() is None
+
+
+def test_create_tag_rejects_long_name(client, app, login):
+    """Nome de tag >100 chars seria DataError no Postgres (500) — deve ser rejeitado."""
+    login()
+    long_name = "T" * 150
+    response = client.post(
+        "/admin/tags",
+        data={"name": long_name},
+        follow_redirects=False,
+    )
+    assert response.status_code == 302
+    with app.app_context():
+        from app.models import Tag
+        assert Tag.query.filter_by(name=long_name).first() is None

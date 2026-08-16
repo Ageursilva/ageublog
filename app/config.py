@@ -26,6 +26,19 @@ class Config:
     )
     PERMANENT_SESSION_LIFETIME = timedelta(hours=2)
     POSTS_PER_PAGE = 6
+    # Defesa em profundidade (o Nginx já limita a 10M).
+    MAX_CONTENT_LENGTH = 10 * 1024 * 1024
+    # Cookie "__Host-": prefixo que o navegador só aceita com Secure + Path=/
+    # + sem Domain. Só faz sentido em HTTPS; em dev (Secure=false) mantém o
+    # nome simples para o login local funcionar.
+    SESSION_COOKIE_NAME = (
+        "__Host-session"
+        if (
+            os.environ.get("SESSION_COOKIE_SECURE", "false").lower()
+            in ("1", "true", "yes")
+        )
+        else "session"
+    )
     TRUSTED_HOSTS = [
         h.strip()
         for h in os.environ.get(
